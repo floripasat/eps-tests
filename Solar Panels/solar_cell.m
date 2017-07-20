@@ -47,7 +47,7 @@ Ir = Ir_T1 * (TaK/T1).^(3/A) .* exp(-b.*(1./TaK - 1/T1));
 
 X2v = Ir_T1/(A*Vt_T1) * exp(Voc_T1/(A*Vt_T1));
 dVdI_Voc =  -0.9635;               % dV/dI at Voc per cell --
-                                 % from manufacturers graph
+% from manufacturers graph
 Rs = (Ns)*(- dVdI_Voc - 1/X2v);         % series resistance per cell
 
 %Calculation of serie resistance Rs
@@ -62,9 +62,23 @@ Vc = Va/Ns;
 Ia = zeros(size(Vc));
 % Iav = Ia;
 for j=1:5;
-Ia = Ia -(Iph - Ia - Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1))./ (-1 - (Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1)).*Rs./Vt_Ta);
-% Iav = [Iav;Ia]; % to observe convergence for debugging.
+    Ia = Ia -(Iph - Ia - Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1))./ (-1 - (Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1)).*Rs./Vt_Ta);
+    % Iav = [Iav;Ia]; % to observe convergence for debugging.
 end
-Ia = Np*Npv*Ia;
+Ia = Np*Npv*Ia; % calculate current for number of cells and panels in parallel
 
+p = plot(Va, Ia);   % plot IxV curve
+uicontrol('Style','text','Position',[345 5 120 20],'string','Rs');  % add slider label
+uicontrol('Style', 'slider','Min',-2,'Max',2,'Value',-0.5,'Position', [225 5 120 20],'Callback', @plot_curve);   % create uicontrol object for slider
+
+    function plot_curve(source, event)  % callback function for slider
+        Rs = source.Value;  % get Rs value
+        for j=1:5;
+            Ia = Ia -(Iph - Ia - Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1))./ (-1 - (Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1)).*Rs./Vt_Ta);
+        end
+        Ia = Np*Npv*Ia;
+        set(p, 'YData', Ia);    % plot graph with new Ia value
+    end
+
+end
 
