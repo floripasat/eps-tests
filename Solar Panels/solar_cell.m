@@ -17,7 +17,8 @@ q = 1.60e-19; % charge on an electron
 A = 2; % "diode quality" factor, =2 for crystaline, <2 for amorphous
 Vg = 1.12; % band gap voltage, 1.12eV for xtal Si, ˜1.75 for amorphous Si.
 Ns = 10; % number of series connected cells (diodes)
-Np = 4;
+Np = 4; % number of parallel connected cells
+Npv = 3;    % number of panels
 
 T1 = 273 + 25;
 Voc_T1 =0.630; % open cct voltage per cell at temperature T1
@@ -64,5 +65,6 @@ for j=1:5;
 Ia = Ia -(Iph - Ia - Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1))./ (-1 - (Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1)).*Rs./Vt_Ta);
 % Iav = [Iav;Ia]; % to observe convergence for debugging.
 end
-Ia = Np*Ia;
+Ia = Np*Npv*Ia;
+
 
