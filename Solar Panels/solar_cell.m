@@ -68,11 +68,25 @@ end
 Ia = Np*Npv*Ia; % calculate current for number of cells and panels in parallel
 
 p = plot(Va, Ia);   % plot IxV curve
-uicontrol('Style','text','Position',[345 5 120 20],'string','Rs');  % add slider label
-uicontrol('Style', 'slider','Min',-2,'Max',2,'Value',-0.5,'Position', [225 5 120 20],'Callback', @plot_curve);   % create uicontrol object for slider
+uicontrol('Style','text','Position',[345 5 40 20],'string','Rs');  % add Rs slider label
+uicontrol('Style','text','Position',[520 5 40 20],'string','A');  % add A slider label
+uicontrol('Style', 'slider','Min',-2,'Max',6,'Value',-0.5,'Position', [225 5 120 20],'Callback', @plot_curve_Rs);   % create uicontrol object for Rs slider
+uicontrol('Style', 'slider','Min',1,'Max',3,'Value',2,'Position', [400 5 120 20],'Callback', @plot_curve_A);   % create uicontrol object for A slider
 
-    function plot_curve(source, event)  % callback function for slider
+    function plot_curve_Rs(source, event)  % callback function for slider
         Rs = source.Value;  % get Rs value
+        for j=1:5;
+            Ia = Ia -(Iph - Ia - Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1))./ (-1 - (Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1)).*Rs./Vt_Ta);
+        end
+        Ia = Np*Npv*Ia;
+        set(p, 'YData', Ia);    % plot graph with new Ia value
+    end
+
+    function plot_curve_A(source, event)  % callback function for slider
+        A = source.Value;  % get A value
+        b = Vg * q/(A*k);
+        Ir = Ir_T1 * (TaK/T1).^(3/A) .* exp(-b.*(1./TaK - 1/T1));
+        Vt_Ta = A * 1.38e-23 * TaK / 1.60e-19; %=A* kT/q
         for j=1:5;
             Ia = Ia -(Iph - Ia - Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1))./ (-1 - (Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1)).*Rs./Vt_Ta);
         end
