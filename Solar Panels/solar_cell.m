@@ -14,9 +14,10 @@ q = 1.60e-19; % charge on an electron
 
 % enter the following constants here, and the model will be
 % calculated based on these. for 1000W/mˆ2
-A = 1.7; % "diode quality" factor, =2 for crystaline, <2 for amorphous
+A = 2; % "diode quality" factor, =2 for crystaline, <2 for amorphous
 Vg = 1.12; % band gap voltage, 1.12eV for xtal Si, ˜1.75 for amorphous Si.
 Ns = 10; % number of series connected cells (diodes)
+Np = 4;
 
 T1 = 273 + 25;
 Voc_T1 =0.630; % open cct voltage per cell at temperature T1
@@ -46,9 +47,7 @@ Ir = Ir_T1 * (TaK/T1).^(3/A) .* exp(-b.*(1./TaK - 1/T1));
 X2v = Ir_T1/(A*Vt_T1) * exp(Voc_T1/(A*Vt_T1));
 dVdI_Voc =  -0.9635;               % dV/dI at Voc per cell --
                                  % from manufacturers graph
-%Rs = - dVdI_Voc - 1/X2v         % series resistance per cell
-
-Rs = 7;
+Rs = (Ns)*(- dVdI_Voc - 1/X2v);         % series resistance per cell
 
 %Calculation of serie resistance Rs
 %Vpmax_Tref = 0.501; %voltage at maximum power for T=Tref
@@ -65,3 +64,5 @@ for j=1:5;
 Ia = Ia -(Iph - Ia - Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1))./ (-1 - (Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1)).*Rs./Vt_Ta);
 % Iav = [Iav;Ia]; % to observe convergence for debugging.
 end
+Ia = Np*Ia;
+
