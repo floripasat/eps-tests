@@ -70,7 +70,7 @@ Ia = Np*Npv*Ia; % calculate current for number of cells and panels in parallel
 p = plot(Va, Ia);   % plot IxV curve
 uicontrol('Style','text','Position',[345 5 40 20],'string','Rs');  % add Rs slider label
 uicontrol('Style','text','Position',[520 5 40 20],'string','A');  % add A slider label
-uicontrol('Style', 'slider','Min',-2,'Max',6,'Value',-0.5,'Position', [225 5 120 20],'Callback', @plot_curve_Rs);   % create uicontrol object for Rs slider
+uicontrol('Style', 'slider','Min',-2,'Max',6.5,'Value',5,'Position', [225 5 120 20],'Callback', @plot_curve_Rs);   % create uicontrol object for Rs slider
 uicontrol('Style', 'slider','Min',1,'Max',3,'Value',2,'Position', [400 5 120 20],'Callback', @plot_curve_A);   % create uicontrol object for A slider
 
     function plot_curve_Rs(source, event)  % callback function for slider
