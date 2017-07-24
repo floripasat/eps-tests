@@ -1,6 +1,6 @@
 lambda = 400:10:730; % wavelength values [nm]
 K = 102.8938907;    % light intensity normalization factor
-I = 2;    % led current [A]
+I = 1.5;    % led current [A]
 A = 0.02*0.006; % solar cell area [m^2]
 eta = 0.22; % solar cell efficiency
 n = 40; % number of solar cells in a panel
@@ -34,7 +34,7 @@ ylabel('ALI(\lambda) [lm]'); % add y axis label (absolute light intensity)
 
 P = ALI./V; % radiant flux from the led [watts]
 
-Irrad = nansum(P(~isinf(P))/(4*pi*0.193^2)); 
+Irrad = (I/3)*nansum(P(~isinf(P))/(4*pi*0.193^2)); 
 %{ 
 irradiance from the led [W/m^2], calulated by formula irrad = E/(4*pi*r^2),
 where P is the radiant flux [watts] from the led and r is the distance between 
