@@ -1,13 +1,14 @@
+function Irrad = LED(I)
 lambda = 400:10:730; % wavelength values [nm]
 K = 102.8938907;    % light intensity normalization factor
-I = 1.5;    % led current [A]
 A = 0.02*0.006; % solar cell area [m^2]
 eta = 0.22; % solar cell efficiency
 n = 40; % number of solar cells in a panel
 N = 3;  % number of solar panels
 
-V = [0 0.683 2.732 8.196 15.709 25.954 40.98 62.153 94.937 142.064 220.609 343.549 484.93 588.746 651.582 ...       % luminosity function data (dimensionless)
-    679.585 679.585 650.216 594.21 517.031 430.973 343.549 260.223 180.995 119.525 73.081 41.663 21.856 11.611 5.464 2.732 1.366 0.683 0];
+V = [1.9124056 5.0542148 11.952535 18.6459546 25.8857758 31.9644936 40.98012 62.153182 94.937278 142.064416 220.609646 343.550006 484.93142 ...
+588.747724 651.583908 679.5528399 679.58699 650.217904 594.21174 517.032514 430.974262 343.550006 260.223762 180.99553 119.52535 73.081214 41.663122 ...
+21.856064 11.611034 5.60744642 2.8003082 1.42747418 0.7171521 0.35516104]; % luminosity function data (dimensionless)
 
 figure; % add new figure window
 plot(lambda, V);    % plot fitted luminosity function
