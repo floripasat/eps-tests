@@ -71,12 +71,16 @@ p = plot(Va, Ia);   % plot IxV curve
 uicontrol('Style','text','Position',[345 5 40 20],'string','Rs');  % add Rs slider label
 uicontrol('Style','text','Position',[520 5 40 20],'string','A');  % add A slider label
 uicontrol('Style','text','Position',[680 5 40 20],'string','Ir');  % add Ir slider label
-uicontrol('Style', 'slider','Min',-2,'Max',10,'Value',5,'Position', [225 5 120 20],'Callback', @plot_curve_Rs);   % create uicontrol object for Rs slider
-uicontrol('Style', 'slider','Min',1,'Max',3,'Value',2,'Position', [400 5 120 20],'Callback', @plot_curve_A);   % create uicontrol object for A slider
-uicontrol('Style', 'slider','Min',1e-7,'Max',10e-7,'Value',5e-7,'Position', [560 5 120 20],'Callback', @plot_curve_Ir);   % create uicontrol object for Ir slider
+uicontrol('position',[270,30,40,20],'style','edit','string',Rs);    % add Rs value to screen
+uicontrol('position',[445,30,40,20],'style','edit','string',A);    % add A value to screen
+uicontrol('position',[605,30,40,20],'style','edit','string',Ir);    % add Ir value to screen
+uicontrol('Style', 'slider','Min',-2,'Max',10,'Value',Rs,'Position', [225 5 120 20],'Callback', @plot_curve_Rs);   % create uicontrol object for Rs slider
+uicontrol('Style', 'slider','Min',1,'Max',3,'Value',A,'Position', [400 5 120 20],'Callback', @plot_curve_A);   % create uicontrol object for A slider
+uicontrol('Style', 'slider','Min',1e-7,'Max',10e-7,'Value',Ir,'Position', [560 5 120 20],'Callback', @plot_curve_Ir);   % create uicontrol object for Ir slider
 
     function plot_curve_Rs(source, event)  % callback function for slider
         Rs = source.Value;  % get Rs value
+        uicontrol('position',[270,30,40,20],'style','edit','string',Rs);    % add Rs value to screen
         for j=1:5;
             Ia = Ia -(Iph - Ia - Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1))./ (-1 - (Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1)).*Rs./Vt_Ta);
         end
@@ -87,6 +91,7 @@ uicontrol('Style', 'slider','Min',1e-7,'Max',10e-7,'Value',5e-7,'Position', [560
 
     function plot_curve_A(source, event)  % callback function for slider
         A = source.Value;  % get A value
+        uicontrol('position',[445,30,40,20],'style','edit','string',A);    % add A value to screen
         Vt_Ta = A * 1.38e-23 * TaK / 1.60e-19; %=A* kT/q;
         for j=1:5;
             Ia = Ia -(Iph - Ia - Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1))./ (-1 - (Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1)).*Rs./Vt_Ta);
@@ -98,6 +103,7 @@ uicontrol('Style', 'slider','Min',1e-7,'Max',10e-7,'Value',5e-7,'Position', [560
 
     function plot_curve_Ir(source, event)  % callback function for slider
         Ir = source.Value;  % get Ir value
+        uicontrol('position',[605,30,40,20],'style','edit','string',Ir);    % add Ir value to screen
         for j=1:5;
             Ia = Ia -(Iph - Ia - Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1))./ (-1 - (Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1)).*Rs./Vt_Ta);
         end
