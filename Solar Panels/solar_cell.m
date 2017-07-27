@@ -1,7 +1,12 @@
-function Ia = solar_cell(Va,Suns,TaC)
+function Ia = solar_cell(Va,Suns,TaC,measured_voltage,measured_current)
 %Code produced by the Dept of Computer Science and Electrical Engineering,
 %University of Queensland, Australia
 %and modified by Embedded Systems Group - UFSC
+
+if nargin == 5
+    Va = measured_voltage(1:round(length(measured_voltage)/length(Va)):length(measured_voltage));
+    measured_current = measured_current(1:round(length(measured_current)/length(Va)):length(measured_current));
+end
 
 % current given voltage, illumination and temperature
 % Ia = msx60(Va,G,T) = array voltage
@@ -55,7 +60,7 @@ Rs = (Ns)*(- dVdI_Voc - 1/X2v);         % series resistance per cell
 %Ipmax_Tref = 0.0372; %current at maximum power for T=Tref
 %Rs = (Voc_T1-Vpmax_Tref)/Ipmax_Tref;
 
-Rsh = 200;
+Rsh = 954.801;
 
 % Ia = 0:0.01:Iph;
 Vt_Ta = A * 1.38e-23 * TaK / 1.60e-19; %=A* kT/q
@@ -63,13 +68,44 @@ Vt_Ta = A * 1.38e-23 * TaK / 1.60e-19; %=A* kT/q
 Vc = Va/Ns;
 Ia = zeros(size(Vc));
 % Iav = Ia;
-for j=1:5;
+for k=1:5;
     Ia = Ia -(Iph - Ia - Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta) -1)-(Vc+Ia.*Rs)./Rsh)./ (-1 - (Ir.*( exp((Vc+Ia.*Rs)./Vt_Ta))).*Rs./Vt_Ta - Rs/Rsh);
     % Iav = [Iav;Ia]; % to observe convergence for debugging.
 end
 Ia = Np*Npv*Ia; % calculate current for number of cells and panels in parallel
 
-p = plot(Va, Ia);   % plot IxV curve
+figure; % create new figure to plot data
+title('Solar Panel IxV Curve');
+hold on;    % keep same plot
+ax = gca;
+xlabel('Voltage [V]');
+ylabel('Current [A]');
+
+if nargin == 5  % verify if the measured voltage and the measured current were passed to the function
+    yyaxis left;
+    ax.YColor = 'k';
+    ylabel('Error [%]');
+    yyaxis right;
+    ylabel('Current [A]');
+    ax.YColor = 'k';
+    error_percent = zeros(size(Vc));  % allocate memory for error array
+    for i=1:length(Vc)  % loop through all the data
+        error_percent(i) = 100*((Ia(i) - measured_current(i))/measured_current(i));   % calculate error from model (%)
+    end
+    yyaxis left    % take left axis of the plot
+    p_error = plot(Va, error_percent); % plot error (%)
+    yyaxis right;   % take right axis of the plot
+    plot(Va, measured_current, 'r'); % plot measured IxV curve
+end
+
+p = plot(Va, Ia, 'g');   % plot model IxV curve
+
+if nargin == 5
+    legend('error', 'measured curve', 'model curve');
+else 
+    legend('model curve');
+end
+
 ylim([0 inf]);
 uicontrol('Style','text','Position',[345 5 40 20],'string','Rs');  % add Rs slider label
 uicontrol('Style','text','Position',[520 5 40 20],'string','A');  % add A slider label
@@ -82,9 +118,9 @@ uicontrol('position',[765,30,40,20],'style','edit','string',Rsh);    % add Rsh v
 uicontrol('Style', 'slider','Min',-2,'Max',10,'Value',Rs,'Position', [225 5 120 20],'Callback', @plot_curve_Rs);   % create uicontrol object for Rs slider
 uicontrol('Style', 'slider','Min',1,'Max',3,'Value',A,'Position', [400 5 120 20],'Callback', @plot_curve_A);   % create uicontrol object for A slider
 uicontrol('Style', 'slider','Min',1e-7,'Max',10e-7,'Value',Ir,'Position', [560 5 120 20],'Callback', @plot_curve_Ir);   % create uicontrol object for Ir slider
-uicontrol('Style', 'slider','Min',20,'Max',1000,'Value',Rsh,'Position', [720 5 120 20],'Callback', @plot_curve_Rsh);   % create uicontrol object for Rsh slider
+uicontrol('Style', 'slider','Min',20,'Max',1500,'Value',Rsh,'Position', [720 5 120 20],'Callback', @plot_curve_Rsh);   % create uicontrol object for Rsh slider
 
-    function plot_curve_Rs(source, event)  % callback function for slider
+    function plot_curve_Rs(source, ~)  % callback function for slider
         Rs = source.Value;  % get Rs value
         uicontrol('position',[270,30,40,20],'style','edit','string',Rs);    % add Rs value to screen
         Ia = zeros(size(Vc));
@@ -93,10 +129,19 @@ uicontrol('Style', 'slider','Min',20,'Max',1000,'Value',Rsh,'Position', [720 5 1
         end
         Ia = Np*Npv*Ia;
         assignin('base', 'Io', Ia);
+        yyaxis right;
         set(p, 'YData', Ia);    % plot graph with new Ia value
+        if (isgraphics(p_error) == 1)
+            error_percent = zeros(size(Vc));
+            for l=1:length(Vc)
+                error_percent(l) = 100*((Ia(l) - measured_current(l))/measured_current(l));   % calculate error from model (%)
+            end
+            yyaxis left;
+            set(p_error, 'YData', error_percent);
+        end
     end
 
-    function plot_curve_A(source, event)  % callback function for slider
+    function plot_curve_A(source, ~)  % callback function for slider
         A = source.Value;  % get A value
         uicontrol('position',[445,30,40,20],'style','edit','string',A);    % add A value to screen
         Ia = zeros(size(Vc));
@@ -106,10 +151,19 @@ uicontrol('Style', 'slider','Min',20,'Max',1000,'Value',Rsh,'Position', [720 5 1
         end
         Ia = Np*Npv*Ia;
         assignin('base', 'Io', Ia);
+        yyaxis right;
         set(p, 'YData', Ia);    % plot graph with new Ia value
+        if (isgraphics(p_error) == 1)
+            error_percent = zeros(size(Vc));
+            for l=1:length(Vc)
+                error_percent(l) = 100*((Ia(l) - measured_current(l))/measured_current(l));   % calculate error from model (%)
+            end
+            yyaxis left;
+            set(p_error, 'YData', error_percent);
+        end
     end
 
-    function plot_curve_Ir(source, event)  % callback function for slider
+    function plot_curve_Ir(source, ~)  % callback function for slider
         Ir = source.Value;  % get Ir value
         uicontrol('position',[605,30,40,20],'style','edit','string',Ir);    % add Ir value to screen
         Ia = zeros(size(Vc));
@@ -118,10 +172,19 @@ uicontrol('Style', 'slider','Min',20,'Max',1000,'Value',Rsh,'Position', [720 5 1
         end
         Ia = Np*Npv*Ia;
         assignin('base', 'Io', Ia);
+        yyaxis right;
         set(p, 'YData', Ia);    % plot graph with new Ia value
+        if (isgraphics(p_error) == 1)
+            error_percent = zeros(size(Vc));
+            for l=1:length(Vc)
+                error_percent(l) = 100*((Ia(l) - measured_current(l))/measured_current(l));   % calculate error from model (%)
+            end
+            yyaxis left;
+            set(p_error, 'YData', error_percent);
+        end
     end
 
-    function plot_curve_Rsh(source, event) % callback function for slider
+    function plot_curve_Rsh(source, ~) % callback function for slider
         Rsh = source.Value;  % get Rsh value
         uicontrol('position',[765,30,40,20],'style','edit','string',Rsh);    % add Rsh value to screen
         Ia = zeros(size(Vc));
@@ -130,7 +193,15 @@ uicontrol('Style', 'slider','Min',20,'Max',1000,'Value',Rsh,'Position', [720 5 1
         end
         Ia = Np*Npv*Ia;
         assignin('base', 'Io', Ia);
+        yyaxis right;
         set(p, 'YData', Ia);    % plot graph with new Ia value
+        if (isgraphics(p_error) == 1)
+            error_percent = zeros(size(Vc));
+            for l=1:length(Vc)
+                error_percent(l) = 100*((Ia(l) - measured_current(l))/measured_current(l));   % calculate error from model (%)
+            end
+            yyaxis left;
+            set(p_error, 'YData', error_percent);
+        end
     end
 end
-
