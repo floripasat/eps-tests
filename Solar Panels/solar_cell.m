@@ -4,8 +4,8 @@ function Ia = solar_cell(Va,Suns,TaC,measured_voltage,measured_current)
 %and modified by Embedded Systems Group - UFSC
 
 if nargin == 5
-    Va = measured_voltage(1:round(length(measured_voltage)/length(Va)):length(measured_voltage));
-    measured_current = measured_current(1:round(length(measured_current)/length(Va)):length(measured_current));
+    Va = measured_voltage(1:10:length(measured_voltage));
+    measured_current = measured_current(1:10:length(measured_current));
 end
 
 % current given voltage, illumination and temperature
