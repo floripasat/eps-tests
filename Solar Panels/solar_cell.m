@@ -8,6 +8,7 @@ if nargin == 5  % verify if measured voltage and measured current were passed to
 end
 
 k = 1.38e-23; % Boltzman’s constant
+q = 1.60e-19; % charge on an electron
 
 A = 2.1; % diode base quality factor, obtained by curve fitting
 Vg = 1.12; % band gap voltage, 1.12eV for xtal Si, ˜1.75 for amorphous Si.
