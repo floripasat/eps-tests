@@ -19,11 +19,11 @@ q = 1.60e-19; % charge on an electron
 
 % enter the following constants here, and the model will be
 % calculated based on these. for 1000W/mˆ2
-A = 2; % "diode quality" factor, =2 for crystaline, <2 for amorphous
+A = 2.1; % diode base quality factor, obtained by curve fitting
 Vg = 1.12; % band gap voltage, 1.12eV for xtal Si, ˜1.75 for amorphous Si.
-Ns = 10; % number of series connected cells (diodes)
+Ns = 10; % number of series connected cells
 Np = 4; % number of parallel connected cells
-Npv = 3;    % number of panels
+Npv = 3;    % number of panels connected in parallel
 
 T1 = 273 + 25;
 Voc_T1 =0.630; % open cct voltage per cell at temperature T1
@@ -40,27 +40,21 @@ TrK = 273 + 25; % reference temp
 % constant "a" can be determined from Isc vs T
 
 Iph_T1 = Isc_T1 * Suns;
-a = (Isc_T2 - Isc_T1)/Isc_T1 * 1/(T2 - T1);
-Iph = Iph_T1 * (1 + a*(TaK - T1));
-
-Vt_T1 = k * T1 / q; % = A * kT/q
-Ir_T1 = Isc_T1 / (exp(Voc_T1/(A*Vt_T1))-1);
-Ir_T2 = Isc_T2 / (exp(Voc_T2/(A*Vt_T1))-1);
+a = 0.1848e-3;  % short circuit temperature coefficient, obtained from the datasheet
+Iph = Iph_T1 * (1 + a*(TaK - T1));  % calculate new Iph based on short circuit temperature coefficient
 
 b = Vg * q/(A*k);
-Ir = Ir_T1 * (TaK/T1).^(3/A) .* exp(-b.*(1./TaK - 1/T1));
+Ir = 2.37917e-07;   % diode base reverse saturation current, obtained from curve fitting
+Ir = Ir * (TaK/T1)^(3/A) * exp(-b*((1/TaK) - (1/T1)));
 
-X2v = Ir_T1/(A*Vt_T1) * exp(Voc_T1/(A*Vt_T1));
-dVdI_Voc =  -0.9635;               % dV/dI at Voc per cell --
-% from manufacturers graph
-Rs = (Ns)*(- dVdI_Voc - 1/X2v);         % series resistance per cell
+Rs = 5.59404;   % solar cell base series resistance, obtained from curve fitting
 
 %Calculation of serie resistance Rs
 %Vpmax_Tref = 0.501; %voltage at maximum power for T=Tref
 %Ipmax_Tref = 0.0372; %current at maximum power for T=Tref
 %Rs = (Voc_T1-Vpmax_Tref)/Ipmax_Tref;
 
-Rsh = 954.801;
+Rsh = 954.801;  % solar cell base shunt resistance, obtained from curve fitting
 
 % Ia = 0:0.01:Iph;
 Vt_Ta = A * 1.38e-23 * TaK / 1.60e-19; %=A* kT/q
@@ -102,7 +96,7 @@ p = plot(Va, Ia, 'g');   % plot model IxV curve
 
 if nargin == 5
     legend('error', 'measured curve', 'model curve');
-else 
+else
     legend('model curve');
 end
 
@@ -117,7 +111,7 @@ uicontrol('position',[605,30,40,20],'style','edit','string',Ir);    % add Ir val
 uicontrol('position',[765,30,40,20],'style','edit','string',Rsh);    % add Rsh value to screen
 uicontrol('Style', 'slider','Min',-2,'Max',10,'Value',Rs,'Position', [225 5 120 20],'Callback', @plot_curve_Rs);   % create uicontrol object for Rs slider
 uicontrol('Style', 'slider','Min',1,'Max',3,'Value',A,'Position', [400 5 120 20],'Callback', @plot_curve_A);   % create uicontrol object for A slider
-uicontrol('Style', 'slider','Min',1e-7,'Max',10e-7,'Value',Ir,'Position', [560 5 120 20],'Callback', @plot_curve_Ir);   % create uicontrol object for Ir slider
+uicontrol('Style', 'slider','Min',1e-7,'Max',1e-5,'Value',Ir,'Position', [560 5 120 20],'Callback', @plot_curve_Ir);   % create uicontrol object for Ir slider
 uicontrol('Style', 'slider','Min',20,'Max',1500,'Value',Rsh,'Position', [720 5 120 20],'Callback', @plot_curve_Rsh);   % create uicontrol object for Rsh slider
 
     function plot_curve_Rs(source, ~)  % callback function for slider
