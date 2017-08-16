@@ -1,6 +1,6 @@
-function Ia = solar_cell(Va,Suns,TaC,measured_voltage,measured_current)
+function Ia = solar_cell(Va,Irradiance,TaC,measured_voltage,measured_current)
 %Code produced by the Dept of Computer Science and Electrical Engineering,
-%University of Queensland, Australia %and modified by Embedded Systems Group - UFSC
+%University of Queensland, Australia and modified by Embedded Systems Group - UFSC
 
 if nargin == 5  % verify if measured voltage and measured current were passed to the function
     Va = measured_voltage(1:10:length(measured_voltage));   % reduce voltage data points by a factor of 10
@@ -16,12 +16,14 @@ Ns = 10; % number of series connected cells
 Np = 4; % number of parallel connected cells
 Npv = 3;    % number of panels connected in parallel
 
+base_Irradiance = 1000; % datasheet data irradiance in W/m^2
+
 T1 = 273 + 25;  % convert T1 from ºC to K
 Isc_T1 = 0.050; % short circuit current per cell at temperature T1
 
 TaK = 273 + TaC; % convert working temperature from ºC to K
 
-Iph_T1 = Isc_T1 * Suns; % photocurrent is considered the same as the short circuit current for a given irradiance
+Iph_T1 = Isc_T1 * Irradiance/base_Irradiance; % photocurrent is considered the same as the short circuit current for a given irradiance
 
 a = 0.1848e-3;  % short circuit temperature coefficient, obtained from the datasheet
 Iph = Iph_T1 * (1 + a*(TaK - T1));  % calculate new Iph based on short circuit temperature coefficient
