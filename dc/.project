@@ -24,11 +24,4 @@
 		<nature>org.eclipse.cdt.core.ccnature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>hal.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/include/hal.h</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
