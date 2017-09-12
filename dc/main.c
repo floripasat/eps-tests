@@ -27,6 +27,7 @@ void main(void){
 		adcChannels.nXPanelVoltage = adcRead(nXPanelVoltageAdcChannel);
 		adcChannels.pYPanelVoltage = adcRead(pYPanelVoltageAdcChannel);
 		adcChannels.nYPanelVoltage = adcRead(nYPanelVoltageAdcChannel);
+		adcChannels.pZPanelVoltage = adcRead(pZPanelVoltageAdcChannel);
 	}
 }
 
