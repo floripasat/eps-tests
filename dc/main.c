@@ -8,6 +8,7 @@
 #include <msp430.h>
 #include "hal.h"
 #include "ADC.h"
+#include "clock.h"
 
 void MSP430config(void);
 
@@ -39,5 +40,6 @@ void main(void){
 }
 
 void MSP430config(void){
+	clockConfig();
 	adcConfig();
 }
