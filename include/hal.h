@@ -9,19 +9,38 @@
 #define HAL_H_
 
 /**** ADC ****/
-#define	VpanelsAdcChannel	0x01
+#define	VpanelsAdcChannel			0x01
 #define	pXPanelVoltageAdcChannel	0x0C
 #define	nXPanelVoltageAdcChannel	0x04
 #define	pYPanelVoltageAdcChannel	0x0D
 #define	nYPanelVoltageAdcChannel	0x0E
 #define	pZPanelVoltageAdcChannel	0x03
 
-#define loadCurrentAdcChannel	0x00
+#define loadCurrentAdcChannel		0x00
 #define pXPanelCurrentAdcChannel	0x07
 #define nXPanelCurrentAdcChannel	0x05
 #define pYPanelCurrentAdcChannel	0x0F
 #define nYPanelCurrentAdcChannel	0x06
 #define pZPanelCurrentAdcChannel	0x02
+
+/**** Regulators Enable and Power Save ****/
+#define load5VEnableDir		P1DIR
+#define load5VEnablePort	P1OUT
+#define load5VEnablePin		BIT3
+#define load5VPSDir			P1DIR
+#define load5VPSPort		P1OUT
+#define load5VPSPin			BIT5
+
+#define EPS3V3PSDir			P1DIR
+#define EPS3V3PSPort		P1OUT
+#define EPS3V3PSPin			BIT4
+
+#define load3V3EnableDir	P1DIR
+#define load3V3EnablePort	P1OUT
+#define load3V3EnablePin	BIT2
+#define load3V3PSDir		P1DIR
+#define load3V3PSPort		P1OUT
+#define load3V3PSPin		BIT7
 
 /**** Debugging LED ****/
 #define debugLedDir	P5DIR
