@@ -9,6 +9,7 @@
 #include "hal.h"
 #include "ADC.h"
 #include "clock.h"
+#include "timer.h"
 
 void MSP430config(void);
 
@@ -23,6 +24,10 @@ void main(void){
 	debugLedPort |= debugLedPin;
 
 	while(1){
+		while(!(TA0CCTL0 && CCIFG));			// wait until interrupt is triggered (1 second is passed)
+		timerDebugPort ^= timerDebugPin;	// set debug pin
+		TA0CCTL0 &= ~CCIFG;					// clear interrupt flag
+
 		adcChannels.VpanelsVoltage = adcRead(VpanelsAdcChannel);
 		adcChannels.pXPanelVoltage = adcRead(pXPanelVoltageAdcChannel);
 		adcChannels.nXPanelVoltage = adcRead(nXPanelVoltageAdcChannel);
@@ -41,5 +46,6 @@ void main(void){
 
 void MSP430config(void){
 	clockConfig();
+	timerConfig();
 	adcConfig();
 }

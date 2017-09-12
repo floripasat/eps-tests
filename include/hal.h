@@ -8,11 +8,6 @@
 #ifndef HAL_H_
 #define HAL_H_
 
-/**** Debugging LED ****/
-#define debugLedDir	P5DIR
-#define debugLedPort P5OUT
-#define debugLedPin BIT4
-
 /**** ADC ****/
 #define	VpanelsAdcChannel	0x01
 #define	pXPanelVoltageAdcChannel	0x0C
@@ -27,5 +22,15 @@
 #define pYPanelCurrentAdcChannel	0x0F
 #define nYPanelCurrentAdcChannel	0x06
 #define pZPanelCurrentAdcChannel	0x02
+
+/**** Debugging LED ****/
+#define debugLedDir	P5DIR
+#define debugLedPort P5OUT
+#define debugLedPin BIT4
+
+/**** Timer Debug ****/
+#define timerDebugDir	P2DIR
+#define timerDebugPort	P2OUT
+#define timerDebugPin	BIT0
 
 #endif /* HAL_H_ */
