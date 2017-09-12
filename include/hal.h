@@ -17,5 +17,6 @@
 #define	VpanelsAdcChannel	0x01
 #define	pXPanelVoltageAdcChannel	0x0C
 #define	nXPanelVoltageAdcChannel	0x04
+#define	pYPanelVoltageAdcChannel	0x0D
 
 #endif /* HAL_H_ */
