@@ -23,5 +23,6 @@
 
 #define loadCurrentAdcChannel	0x00
 #define pXPanelCurrentAdcChannel	0x07
+#define nXPanelCurrentAdcChannel	0x05
 
 #endif /* HAL_H_ */
