@@ -23,6 +23,7 @@ void main(void){
 
 	while(1){
 		adcChannels.VpanelsVoltage = adcRead(VpanelsAdcChannel);
+		adcChannels.pXPanelVoltage = adcRead(pXPanelVoltageAdcChannel);
 	}
 }
 
