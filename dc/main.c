@@ -33,6 +33,7 @@ void main(void){
 		adcChannels.pXPanelCurrent = adcRead(pXPanelCurrentAdcChannel);
 		adcChannels.nXPanelCurrent = adcRead(nXPanelCurrentAdcChannel);
 		adcChannels.pYPanelCurrent = adcRead(pYPanelCurrentAdcChannel);
+		adcChannels.nYPanelCurrent = adcRead(nYPanelCurrentAdcChannel);
 	}
 }
 
