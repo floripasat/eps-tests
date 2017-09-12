@@ -22,5 +22,6 @@
 #define	pZPanelVoltageAdcChannel	0x03
 
 #define loadCurrentAdcChannel	0x00
+#define pXPanelCurrentAdcChannel	0x07
 
 #endif /* HAL_H_ */

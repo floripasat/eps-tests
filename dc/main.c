@@ -30,6 +30,7 @@ void main(void){
 		adcChannels.pZPanelVoltage = adcRead(pZPanelVoltageAdcChannel);
 
 		adcChannels.loadCurrent = adcRead(loadCurrentAdcChannel);
+		adcChannels.pXPanelCurrent = adcRead(pXPanelCurrentAdcChannel);
 	}
 }
 
