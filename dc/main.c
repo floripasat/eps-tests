@@ -6,6 +6,7 @@
  */
 
 #include <msp430.h>
+#include <stdio.h>
 #include "hal.h"
 #include "ADC.h"
 #include "clock.h"
@@ -79,6 +80,8 @@ void main(void){
 		uartTXFloat(adcChannels.loadCurrent*loadCurrentUnit);
 		uartTX(",");
 
+		uint8_t auxString[4];
+
 		batteryMeasurements.voltage = (DS2784ReadRegister(voltage_MSB_register) << 8) + DS2784ReadRegister(voltage_LSB_register);
 		uartTXFloat((batteryMeasurements.voltage >> 5)*batteryVoltageUnit);
 		uartTX(",");
@@ -92,6 +95,9 @@ void main(void){
 		uartTXFloat((batteryMeasurements.temperature >> 5)*batteryMonitorTemperatureUnit);
 		uartTX(",");
 		batteryMeasurements.protectionRegister = DS2784ReadRegister(protection_register);
+		sprintf(auxString, "%#04X", batteryMeasurements.protectionRegister);
+		uartTX(auxString);
+		uartTX(",");
 		batteryMeasurements.statusRegister = DS2784ReadRegister(status_register);
 		batteryMeasurements.accumulatedCurrent = (DS2784ReadRegister(accumulated_current_MSB_register) << 8) + DS2784ReadRegister(accumulated_current_LSB_register);
 	}
