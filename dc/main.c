@@ -64,6 +64,8 @@ void main(void){
 		uartTXFloat(adcChannels.pXPanelCurrent*panelCurrentUnit);
 		uartTX(",");
 		adcChannels.nXPanelCurrent = adcRead(nXPanelCurrentAdcChannel);
+		uartTXFloat(adcChannels.nXPanelCurrent*panelCurrentUnit);
+		uartTX(",");
 		adcChannels.pYPanelCurrent = adcRead(pYPanelCurrentAdcChannel);
 		adcChannels.nYPanelCurrent = adcRead(nYPanelCurrentAdcChannel);
 		adcChannels.pZPanelCurrent = adcRead(pZPanelCurrentAdcChannel);
