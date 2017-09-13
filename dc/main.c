@@ -55,6 +55,7 @@ void main(void){
 		adcChannels.pZPanelCurrent = adcRead(pZPanelCurrentAdcChannel);
 
 		batteryMeasurements.voltage = (DS2784ReadRegister(voltage_MSB_register) << 8) + DS2784ReadRegister(voltage_LSB_register);
+		batteryMeasurements.current = (DS2784ReadRegister(current_MSB_register) << 8) + DS2784ReadRegister(current_LSB_register);
 	}
 }
 

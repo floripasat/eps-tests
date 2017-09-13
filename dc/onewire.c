@@ -184,7 +184,7 @@ void DS2784Config(void){
 	OWWriteByte(skipNetAddress);						// slave net address (only one slave on bus, CC is used)
 	OWWriteByte(writeRegisterCommand);					// write operation
 	OWWriteByte(current_gain_MSB_register);				// register address
-	OWWriteByte(0x24);									// value to be written
+	OWWriteByte(0x04);									// value to be written
 
 	OneWireReset();								// Overcurrent Threshold REGISTER and current gain calibration LSB
 	OWWriteByte(skipNetAddress);				// slave net address (only one slave on bus, CC is used)
