@@ -90,5 +90,6 @@
 #define batteryVoltageUnit				0.004883
 #define batteryCurrentUnit				0.0000015625/rsense
 #define batteryAccumulatedCurrentUnit	6.25*0.000001/rsense
+#define batteryMonitorTemperatureUnit	0.125
 
 #endif /* HAL_H_ */
