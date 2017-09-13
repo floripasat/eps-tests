@@ -22,10 +22,10 @@
 #define copyData 0x48
 
 struct batteryMeasurements_t{
-	uint16_t voltage;
-	uint16_t current;
-	uint16_t averageCurrent;
-	uint16_t temperature;
+	int16_t voltage;
+	int16_t current;
+	int16_t averageCurrent;
+	int16_t temperature;
 	uint16_t accumulatedCurrent;
 	uint8_t statusRegister;
 	uint8_t protectionRegister;
