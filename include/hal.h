@@ -8,7 +8,7 @@
 #ifndef HAL_H_
 #define HAL_H_
 
-/**** ADC ****/
+/**** ADC Channels ****/
 #define	VpanelsAdcChannel			0x01
 #define	pXPanelVoltageAdcChannel	0x0C
 #define	nXPanelVoltageAdcChannel	0x04
@@ -22,6 +22,9 @@
 #define pYPanelCurrentAdcChannel	0x0F
 #define nYPanelCurrentAdcChannel	0x06
 #define pZPanelCurrentAdcChannel	0x02
+
+/**** ADC Units ****/
+#define VpanelsUnit	0.00106133355034722				// (2.5/2^12)*(180+133)/180
 
 /**** Regulators Enable and Power Save ****/
 #define load5VEnableDir		P1DIR

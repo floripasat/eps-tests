@@ -37,11 +37,13 @@ void main(void){
 	load3V3PSPort |= load3V3PSPin;			// disable 3V3 load regulator PS
 
 	while(1){
-		while(!(TA0CCTL0 && CCIFG));			// wait until interrupt is triggered (1 second is passed)
+		while(!(TA0CCTL0 && CCIFG));		// wait until interrupt is triggered (1 second is passed)
 		timerDebugPort ^= timerDebugPin;	// set debug pin
 		TA0CCTL0 &= ~CCIFG;					// clear interrupt flag
 
 		adcChannels.VpanelsVoltage = adcRead(VpanelsAdcChannel);
+		uartTXFloat(adcChannels.VpanelsVoltage*VpanelsUnit);
+		uartTX(",");
 		adcChannels.pXPanelVoltage = adcRead(pXPanelVoltageAdcChannel);
 		adcChannels.nXPanelVoltage = adcRead(nXPanelVoltageAdcChannel);
 		adcChannels.pYPanelVoltage = adcRead(pYPanelVoltageAdcChannel);
@@ -71,10 +73,10 @@ void MSP430config(void){
 	adcConfig();
 	uartConfig();
 
-	load5VEnableDir |= load5VEnablePin;	// set 5V load regulator enable as output
-	load5VPSDir |= load5VPSPin;			// set 5V load regulator PS as output
+	load5VEnableDir |= load5VEnablePin;		// set 5V load regulator enable as output
+	load5VPSDir |= load5VPSPin;				// set 5V load regulator PS as output
 
-	EPS3V3PSDir |= EPS3V3PSPin;			// set 3V3 EPS regulator PS as output
+	EPS3V3PSDir |= EPS3V3PSPin;				// set 3V3 EPS regulator PS as output
 
 	load3V3EnableDir |= load3V3EnablePin;	// set 3V3 load regulator enable as output
 	load3V3PSDir |= load3V3PSPin;			// set 3V3 load regulator PS as output
