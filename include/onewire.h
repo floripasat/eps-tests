@@ -15,13 +15,6 @@
 
 #define clock 8000000
 
-/**** UNITS ****/
-
-#define	rsense			0.02
-#define voltage_unit	0.004883
-#define current_unit	0.0000015625/rsense
-#define accumulated_current_unit	6.25*0.000001/rsense
-
 /**** COMMANDS ****/
 #define writeRegisterCommand 0x6C
 #define readRegisterCommand 0x69

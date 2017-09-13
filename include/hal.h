@@ -84,4 +84,11 @@
 #define voltage_MSB_register 0x0C
 #define voltage_LSB_register 0x0D
 
+/**** DS2784 Units ****/
+
+#define	rsense							0.02
+#define batteryVoltageUnit				0.004883
+#define batteryCurrentUnit				0.0000015625/rsense
+#define batteryAccumulatedCurrentUnit	6.25*0.000001/rsense
+
 #endif /* HAL_H_ */
