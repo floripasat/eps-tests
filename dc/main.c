@@ -11,6 +11,7 @@
 #include "clock.h"
 #include "timer.h"
 #include "onewire.h"
+#include "uart.h"
 
 void MSP430config(void);
 
@@ -68,6 +69,7 @@ void MSP430config(void){
 	clockConfig();
 	timerConfig();
 	adcConfig();
+	uartConfig();
 
 	load5VEnableDir |= load5VEnablePin;	// set 5V load regulator enable as output
 	load5VPSDir |= load5VPSPin;			// set 5V load regulator PS as output
