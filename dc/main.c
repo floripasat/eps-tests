@@ -99,6 +99,9 @@ void main(void){
 		uartTX(auxString);
 		uartTX(",");
 		batteryMeasurements.statusRegister = DS2784ReadRegister(status_register);
+		sprintf(auxString, "%#04X", batteryMeasurements.statusRegister);
+		uartTX(auxString);
+		uartTX(",");
 		batteryMeasurements.accumulatedCurrent = (DS2784ReadRegister(accumulated_current_MSB_register) << 8) + DS2784ReadRegister(accumulated_current_LSB_register);
 	}
 }
