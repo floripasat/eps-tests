@@ -52,4 +52,30 @@
 #define timerDebugPort	P2OUT
 #define timerDebugPin	BIT0
 
+/**** DS2784 Pins ****/
+
+#define P_WireOUT P9OUT
+#define P_WireIN P9IN
+#define DIR_P_Wire P9DIR
+#define BitWire	BIT1
+
+/**** DS2784 Registers ****/
+
+#define protection_register 0x00
+#define protector_threshold_register 0x7F
+#define status_register 0x01
+#define control_register 0x60
+#define accumulated_current_MSB_register 0x10
+#define accumulated_current_LSB_register 0x11
+#define temperature_MSB_register 0x0A
+#define temperature_LSB_register 0x0B
+#define average_current_MSB_register 0x08
+#define average_current_LSB_register 0x09
+#define current_gain_MSB_register 0x78
+#define current_gain_LSB_register  0x79
+#define current_MSB_register 0x0E
+#define current_LSB_register 0x0F
+#define voltage_MSB_register 0x0C
+#define voltage_LSB_register 0x0D
+
 #endif /* HAL_H_ */

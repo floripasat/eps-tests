@@ -10,6 +10,7 @@
 #include "ADC.h"
 #include "clock.h"
 #include "timer.h"
+#include "onewire.h"
 
 void MSP430config(void);
 
@@ -17,8 +18,11 @@ void main(void){
 	WDTCTL = WDTPW | WDTHOLD;
 
 	struct adcChannels_t adcChannels;
+	struct batteryMeasurements_t batteryMeasurements;
 
 	MSP430config();
+
+	DS2784Config();
 
 	debugLedDir |= debugLedPin;
 	debugLedPort |= debugLedPin;
@@ -49,6 +53,8 @@ void main(void){
 		adcChannels.pYPanelCurrent = adcRead(pYPanelCurrentAdcChannel);
 		adcChannels.nYPanelCurrent = adcRead(nYPanelCurrentAdcChannel);
 		adcChannels.pZPanelCurrent = adcRead(pZPanelCurrentAdcChannel);
+
+		batteryMeasurements.voltage = (DS2784ReadRegister(voltage_MSB_register) << 8) + DS2784ReadRegister(voltage_LSB_register);
 	}
 }
 
