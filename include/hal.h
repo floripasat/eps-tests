@@ -25,6 +25,7 @@
 
 /**** ADC Units ****/
 #define VpanelsUnit	0.00106133355034722				// (2.5/2^12)*(180+133)/180
+#define panelVoltageUnit	0.00106133355034722		// (2.5/2^12)*(180+133)/180
 
 /**** Regulators Enable and Power Save ****/
 #define load5VEnableDir		P1DIR
