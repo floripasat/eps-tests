@@ -57,13 +57,15 @@ void main(void){
 		uartTXFloat(adcChannels.nYPanelVoltage*panelVoltageUnit);
 		uartTX(",");
 		adcChannels.pZPanelVoltage = adcRead(pZPanelVoltageAdcChannel);
+		uartTXFloat(adcChannels.pZPanelVoltage*panelVoltageUnit);
+		uartTX(",");
 
-		adcChannels.loadCurrent = adcRead(loadCurrentAdcChannel);
 		adcChannels.pXPanelCurrent = adcRead(pXPanelCurrentAdcChannel);
 		adcChannels.nXPanelCurrent = adcRead(nXPanelCurrentAdcChannel);
 		adcChannels.pYPanelCurrent = adcRead(pYPanelCurrentAdcChannel);
 		adcChannels.nYPanelCurrent = adcRead(nYPanelCurrentAdcChannel);
 		adcChannels.pZPanelCurrent = adcRead(pZPanelCurrentAdcChannel);
+		adcChannels.loadCurrent = adcRead(loadCurrentAdcChannel);
 
 		batteryMeasurements.voltage = (DS2784ReadRegister(voltage_MSB_register) << 8) + DS2784ReadRegister(voltage_LSB_register);
 		batteryMeasurements.current = (DS2784ReadRegister(current_MSB_register) << 8) + DS2784ReadRegister(current_LSB_register);
