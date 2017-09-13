@@ -60,6 +60,7 @@ void main(void){
 		batteryMeasurements.temperature = (DS2784ReadRegister(temperature_MSB_register) << 8) + DS2784ReadRegister(temperature_LSB_register);
 		batteryMeasurements.protectionRegister = DS2784ReadRegister(protection_register);
 		batteryMeasurements.statusRegister = DS2784ReadRegister(status_register);
+		batteryMeasurements.accumulatedCurrent = (DS2784ReadRegister(accumulated_current_MSB_register) << 8) + DS2784ReadRegister(accumulated_current_LSB_register);
 	}
 }
 
