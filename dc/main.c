@@ -48,6 +48,8 @@ void main(void){
 		uartTXFloat(adcChannels.pXPanelVoltage*panelVoltageUnit);
 		uartTX(",");
 		adcChannels.nXPanelVoltage = adcRead(nXPanelVoltageAdcChannel);
+		uartTXFloat(adcChannels.nXPanelVoltage*panelVoltageUnit);
+		uartTX(",");
 		adcChannels.pYPanelVoltage = adcRead(pYPanelVoltageAdcChannel);
 		adcChannels.nYPanelVoltage = adcRead(nYPanelVoltageAdcChannel);
 		adcChannels.pZPanelVoltage = adcRead(pZPanelVoltageAdcChannel);
