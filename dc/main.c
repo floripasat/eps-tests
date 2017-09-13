@@ -83,6 +83,8 @@ void main(void){
 		uartTXFloat((batteryMeasurements.voltage >> 5)*batteryVoltageUnit);
 		uartTX(",");
 		batteryMeasurements.current = (DS2784ReadRegister(current_MSB_register) << 8) + DS2784ReadRegister(current_LSB_register);
+		uartTXFloat(batteryMeasurements.current*batteryCurrentUnit);
+		uartTX(",");
 		batteryMeasurements.averageCurrent = (DS2784ReadRegister(average_current_MSB_register) << 8) + DS2784ReadRegister(average_current_LSB_register);
 		batteryMeasurements.temperature = (DS2784ReadRegister(temperature_MSB_register) << 8) + DS2784ReadRegister(temperature_LSB_register);
 		batteryMeasurements.protectionRegister = DS2784ReadRegister(protection_register);
