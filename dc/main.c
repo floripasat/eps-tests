@@ -73,6 +73,8 @@ void main(void){
 		uartTXFloat(adcChannels.nYPanelCurrent*panelCurrentUnit);
 		uartTX(",");
 		adcChannels.pZPanelCurrent = adcRead(pZPanelCurrentAdcChannel);
+		uartTXFloat(adcChannels.pZPanelCurrent*panelCurrentUnit);
+		uartTX(",");
 		adcChannels.loadCurrent = adcRead(loadCurrentAdcChannel);
 
 		batteryMeasurements.voltage = (DS2784ReadRegister(voltage_MSB_register) << 8) + DS2784ReadRegister(voltage_LSB_register);
