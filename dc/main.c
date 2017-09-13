@@ -103,6 +103,8 @@ void main(void){
 		uartTX(auxString);
 		uartTX(",");
 		batteryMeasurements.accumulatedCurrent = (DS2784ReadRegister(accumulated_current_MSB_register) << 8) + DS2784ReadRegister(accumulated_current_LSB_register);
+		uartTXFloat(batteryMeasurements.accumulatedCurrent*batteryAccumulatedCurrentUnit);
+		uartTX(",");
 	}
 }
 
