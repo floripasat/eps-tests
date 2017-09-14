@@ -5,8 +5,8 @@
  *      Author: Bruno Eiterer
  */
 
-#ifndef HALDC_H_
-#define HALDC_H_
+#ifndef HAL_H_
+#define HAL_H_
 
 /**** ADC Channels ****/
 #define	VpanelsAdcChannel			0x01
@@ -92,4 +92,4 @@
 #define batteryAccumulatedCurrentUnit	6.25*0.000001/rsense
 #define batteryMonitorTemperatureUnit	0.125
 
-#endif /* HALDC_H_ */
+#endif /* HAL_H_ */

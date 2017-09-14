@@ -5,28 +5,28 @@
  *      Author: Bruno Eiterer
  */
 
-#ifndef HALDC_H_
-#define HALDC_H_
+#ifndef HALVLDO_H_
+#define HALVLDO_H_
 
 /**** ADC Channels ****/
-#define	VpanelsAdcChannel			0x01
-#define	pXPanelVoltageAdcChannel	0x0C
+#define	VpanelsAdcChannel			0x0F
+#define	pXPanelVoltageAdcChannel	0x01
 #define	nXPanelVoltageAdcChannel	0x04
-#define	pYPanelVoltageAdcChannel	0x0D
-#define	nYPanelVoltageAdcChannel	0x0E
-#define	pZPanelVoltageAdcChannel	0x03
+#define	pYPanelVoltageAdcChannel	0x06
+#define	nYPanelVoltageAdcChannel	0x0D
+#define VChargeAdcChannel			0x05
 
-#define loadCurrentAdcChannel		0x00
-#define pXPanelCurrentAdcChannel	0x07
-#define nXPanelCurrentAdcChannel	0x05
-#define pYPanelCurrentAdcChannel	0x0F
-#define nYPanelCurrentAdcChannel	0x06
-#define pZPanelCurrentAdcChannel	0x02
+#define loadCurrentAdcChannel		0x02
+#define pXPanelCurrentAdcChannel	0x00
+#define nXPanelCurrentAdcChannel	0x03
+#define pYPanelCurrentAdcChannel	0x07
+#define nYPanelCurrentAdcChannel	0x0E
+#define pZPanelCurrentAdcChannel	0x0C
 
 /**** ADC Units ****/
-#define VpanelsUnit	0.00106133355034722				// (2.5/2^12)*(180+133)/180
-#define panelVoltageUnit	0.00106133355034722		// (2.5/2^12)*(180+133)/180
-#define panelCurrentUnit	0.00006204336086404		// (2.5/2^12)/(0.05*0.025*7870)
+#define VpanelsUnit	0.001220703125					// (2.5/2^12)*(100+100)/100
+#define panelVoltageUnit	0.001220703125			// (2.5/2^12)*(180+133)/180
+#define panelCurrentUnit	0.000048828125			// (2.5/2^12)/(0.05*0.025*10000)
 #define loadCurrentUnit		0.00014796401515152		// (2.5/2^12)/(0.05*0.025*3300)
 
 /**** Regulators Enable and Power Save ****/
@@ -92,4 +92,4 @@
 #define batteryAccumulatedCurrentUnit	6.25*0.000001/rsense
 #define batteryMonitorTemperatureUnit	0.125
 
-#endif /* HALDC_H_ */
+#endif /* HALVLDO_H_ */
