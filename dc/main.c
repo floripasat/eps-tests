@@ -7,7 +7,7 @@
 
 #include <msp430.h>
 #include <stdio.h>
-#include "hal.h"
+#include "halDC.h"
 #include "ADC.h"
 #include "clock.h"
 #include "timer.h"

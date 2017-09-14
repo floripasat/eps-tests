@@ -11,7 +11,7 @@
 #include <msp430.h>
 #include <stdint.h>
 #include <intrinsics.h>
-#include "hal.h"
+#include "halDC.h"
 
 #define clock 8000000
 
