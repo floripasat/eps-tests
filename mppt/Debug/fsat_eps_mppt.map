@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v17.6.0                     
 ******************************************************************************
->> Linked Mon Sep 18 14:45:06 2017
+>> Linked Mon Sep 18 14:45:44 2017
 
 OUTPUT FILE NAME:   <fsat_eps_mppt.out>
 ENTRY POINT SYMBOL: "_c_int00_noargs_noexit"  address: 00008000
@@ -85,7 +85,7 @@ MEMORY CONFIGURATION
   INT61                 0000fffa   00000002  00000002  00000000  RWIX
   INT62                 0000fffc   00000002  00000002  00000000  RWIX
   RESET                 0000fffe   00000002  00000002  00000000  RWIX
-  FLASH2                00010000   00078000  00003f34  000740cc  RWIX
+  FLASH2                00010000   00078000  0000403a  00073fc6  RWIX
   RAM2                  000f0000   0000c000  00000000  0000c000  RWIX
 
 
@@ -216,106 +216,108 @@ SYSNMI     0    0000fffc    00000002
 .reset     0    0000fffe    00000002     
                   0000fffe    00000002     rts430x_lc_rd_eabi.lib : boot.obj (.reset)
 
-.text      0    00010000    00003f34     
+.text      0    00010000    0000403a     
                   00010000    00000466     rts430x_lc_rd_eabi.lib : frcdivd.obj (.text:__TI_frcdivd)
                   00010466    0000034e                            : div64u.obj (.text:__mspabi_divull)
                   000107b4    000002e0                            : addd.obj (.text:__mspabi_addd)
                   00010a94    00000280                            : frcmpyd.obj (.text:__TI_frcmpyd)
-                  00010d14    00000266                            : mpyd.obj (.text:__mspabi_mpyd)
-                  00010f7a    00000260                            : _printfi.obj (.text:_pproc_fgea)
-                  000111da    0000025e                            : _printfi.obj (.text:_setfield)
-                  00011438    00000248                            : frcaddd.obj (.text:__TI_frcaddd)
-                  00011680    00000238                            : _printfi.obj (.text:__TI_printfi)
-                  000118b8    00000224                            : _printfi.obj (.text:acvt)
-                  00011adc    00000222                            : divd.obj (.text:__mspabi_divd)
-                  00011cfe    000001f2     main.obj (.text:main)
-                  00011ef0    000001e6     rts430x_lc_rd_eabi.lib : _printfi.obj (.text:ecvt)
-                  000120d6    000001c8                            : _printfi.obj (.text:fcvt)
-                  0001229e    000001a4                            : _printfi.obj (.text:_pconv_e)
-                  00012442    00000198                            : s_scalbn.obj (.text:scalbn)
-                  000125da    00000188                            : _printfi.obj (.text:_getarg_diouxp)
-                  00012762    00000170                            : _printfi.obj (.text:_pconv_a)
-                  000128d2    00000148                            : _printfi.obj (.text:_pproc_diouxp)
-                  00012a1a    0000012a                            : _printfi.obj (.text:_ltostr)
-                  00012b44    00000116     onewire.obj (.text:DS2784Config)
-                  00012c5a    000000fc     rts430x_lc_rd_eabi.lib : _printfi.obj (.text:_pconv_g)
-                  00012d56    000000fa                            : _printfi.obj (.text:_pproc_fwp)
-                  00012e50    000000d8                            : cmpd.obj (.text:__mspabi_cmpd)
-                  00012f28    000000b8                            : fs_mpy.obj (.text)
-                  00012fe0    000000b2                            : renormd.obj (.text:__TI_renormd)
-                  00013092    000000a6                            : _printfi.obj (.text:_pproc_str)
-                  00013138    000000a6                            : s_frexp.obj (.text:frexp)
-                  000131de    0000009e                            : fltlid.obj (.text:__mspabi_fltlid)
-                  0001327c    00000090                            : _printfi.obj (.text:_ecpy)
-                  0001330c    00000090                            : _printfi.obj (.text:_mcpy)
-                  0001339c    0000008c                            : cvtdf.obj (.text:__mspabi_cvtdf)
-                  00013428    00000082                            : autoinit_wdt.obj (.text:_auto_init_hold_wdt)
-                  000134aa    00000080                            : ltoa.obj (.text:ltoa)
-                  0001352a    0000007a     uart.obj (.text:uartTXFloat)
-                  000135a4    00000078     rts430x_lc_rd_eabi.lib : _printfi.obj (.text:_pconv_f)
-                  0001361c    00000078                            : copy_decompress_lzss.obj (.text:decompress:lzss:__TI_decompress_lzss)
-                  00013694    00000066                            : cvtfd.obj (.text:__mspabi_cvtfd)
-                  000136fa    00000066                            : fixdli.obj (.text:__mspabi_fixdli)
-                  00013760    00000066                            : cpy_tbl.obj (.text:copy_in)
-                  000137c6    00000062                            : atoi.obj (.text:atoi)
-                  00013828    00000058                            : div32u.obj (.text)
-                  00013880    00000056     onewire.obj (.text:OneWireWrite)
-                  000138d6    0000004e     rts430x_lc_rd_eabi.lib : _printfi.obj (.text:_fcpy)
-                  00013924    0000004a     onewire.obj (.text:OneWireReset)
-                  0001396e    0000004a     rts430x_lc_rd_eabi.lib : fs_cmp.obj (.text)
-                  000139b8    00000044                            : sprintf.obj (.text:sprintf)
-                  000139fc    00000040                            : div32s.obj (.text)
-                  00013a3c    0000003e                            : asr32.obj (.text:l_asr_const)
-                  00013a7a    0000003e                            : lsl32.obj (.text:l_lsl_const)
-                  00013ab8    0000003e                            : lsr32.obj (.text:l_lsr_const)
-                  00013af6    0000003c     onewire.obj (.text:OneWireReadBit)
-                  00013b32    0000003a     rts430x_lc_rd_eabi.lib : lsl64.obj (.text:__mspabi_sllll)
-                  00013b6c    0000003a                            : lsr64.obj (.text:__mspabi_srlll)
-                  00013ba6    00000036                            : fs_itof.obj (.text)
-                  00013bdc    00000032                            : subd.obj (.text:__mspabi_subd)
-                  00013c0e    00000030     clock.obj (.text:clockConfig)
-                  00013c3e    0000002e     rts430x_lc_rd_eabi.lib : negd.obj (.text:__mspabi_negd)
-                  00013c6c    0000002e                            : s_copysign.obj (.text:copysign)
-                  00013c9a    00000028                            : fixdi.obj (.text:__mspabi_fixdi)
-                  00013cc2    00000028     uart.obj (.text:uartConfig)
-                  00013cea    00000024     rts430x_lc_rd_eabi.lib : mult32_f5hw.obj (.text)
-                  00013d0e    00000022     onewire.obj (.text:DS2784ReadRegister)
-                  00013d30    00000022     onewire.obj (.text:OWReadByte)
-                  00013d52    00000020     rts430x_lc_rd_eabi.lib : sprintf.obj (.text:_outs)
-                  00013d72    00000020     uart.obj (.text:uartTX)
-                  00013d92    0000001e     rts430x_lc_rd_eabi.lib : memccpy.obj (.text:memccpy)
-                  00013db0    0000001c     onewire.obj (.text:OWWriteByte)
-                  00013dcc    0000001c     rts430x_lc_rd_eabi.lib : strchr.obj (.text:strchr)
-                  00013de8    0000001a     onewire.obj (.text:inp)
-                  00013e02    00000018     rts430x_lc_rd_eabi.lib : mult16_f5hw.obj (.text)
-                  00013e1a    00000016                            : memset.obj (.text:memset)
-                  00013e30    00000016                            : div16u.obj (.text)
-                  00013e46    00000016     timer.obj (.text:timerConfig)
-                  00013e5c    00000014     rts430x_lc_rd_eabi.lib : sprintf.obj (.text:_outc)
-                  00013e70    00000014                            : memcpy.obj (.text:memcpy)
-                  00013e84    00000014     onewire.obj (.text:outp)
-                  00013e98    00000012     rts430x_lc_rd_eabi.lib : copy_decompress_none.obj (.text:decompress:none:__TI_decompress_none)
-                  00013eaa    00000012                            : toupper.obj (.text:toupper)
-                  00013ebc    00000010                            : asr32.obj (.text:l_asr)
-                  00013ecc    00000010                            : lsl32.obj (.text:l_lsl)
-                  00013edc    00000010                            : lsr32.obj (.text:l_lsr)
-                  00013eec    0000000e     main.obj (.text:MSP430config)
-                  00013efa    0000000e     rts430x_lc_rd_eabi.lib : strlen.obj (.text:strlen)
-                  00013f08    0000000c                            : fltid.obj (.text:__mspabi_fltid)
-                  00013f14    0000000a                            : abs.obj (.text:abs)
-                  00013f1e    0000000a                            : fs_neg.obj (.text)
-                  00013f28    00000006                            : exit.obj (.text:abort)
-                  00013f2e    00000004                            : pre_init.obj (.text:_system_pre_init)
-                  00013f32    00000002                            : startup.obj (.text:_system_post_cinit)
+                  00010d14    00000272     main.obj (.text:main)
+                  00010f86    00000266     rts430x_lc_rd_eabi.lib : mpyd.obj (.text:__mspabi_mpyd)
+                  000111ec    00000260                            : _printfi.obj (.text:_pproc_fgea)
+                  0001144c    0000025e                            : _printfi.obj (.text:_setfield)
+                  000116aa    00000248                            : frcaddd.obj (.text:__TI_frcaddd)
+                  000118f2    00000238                            : _printfi.obj (.text:__TI_printfi)
+                  00011b2a    00000224                            : _printfi.obj (.text:acvt)
+                  00011d4e    00000222                            : divd.obj (.text:__mspabi_divd)
+                  00011f70    000001e6                            : _printfi.obj (.text:ecvt)
+                  00012156    000001c8                            : _printfi.obj (.text:fcvt)
+                  0001231e    000001a4                            : _printfi.obj (.text:_pconv_e)
+                  000124c2    00000198                            : s_scalbn.obj (.text:scalbn)
+                  0001265a    00000188                            : _printfi.obj (.text:_getarg_diouxp)
+                  000127e2    00000170                            : _printfi.obj (.text:_pconv_a)
+                  00012952    00000148                            : _printfi.obj (.text:_pproc_diouxp)
+                  00012a9a    0000012a                            : _printfi.obj (.text:_ltostr)
+                  00012bc4    00000116     onewire.obj (.text:DS2784Config)
+                  00012cda    000000fc     rts430x_lc_rd_eabi.lib : _printfi.obj (.text:_pconv_g)
+                  00012dd6    000000fa                            : _printfi.obj (.text:_pproc_fwp)
+                  00012ed0    000000d8                            : cmpd.obj (.text:__mspabi_cmpd)
+                  00012fa8    000000b8                            : fs_mpy.obj (.text)
+                  00013060    000000b2                            : renormd.obj (.text:__TI_renormd)
+                  00013112    000000a6                            : _printfi.obj (.text:_pproc_str)
+                  000131b8    000000a6                            : s_frexp.obj (.text:frexp)
+                  0001325e    0000009e                            : fltlid.obj (.text:__mspabi_fltlid)
+                  000132fc    00000090                            : _printfi.obj (.text:_ecpy)
+                  0001338c    00000090                            : _printfi.obj (.text:_mcpy)
+                  0001341c    0000008c                            : cvtdf.obj (.text:__mspabi_cvtdf)
+                  000134a8    00000082                            : autoinit_wdt.obj (.text:_auto_init_hold_wdt)
+                  0001352a    00000080                            : fltuld.obj (.text:__mspabi_fltuld)
+                  000135aa    00000080                            : ltoa.obj (.text:ltoa)
+                  0001362a    0000007a     uart.obj (.text:uartTXFloat)
+                  000136a4    00000078     rts430x_lc_rd_eabi.lib : _printfi.obj (.text:_pconv_f)
+                  0001371c    00000078                            : copy_decompress_lzss.obj (.text:decompress:lzss:__TI_decompress_lzss)
+                  00013794    00000066                            : cvtfd.obj (.text:__mspabi_cvtfd)
+                  000137fa    00000066                            : fixdli.obj (.text:__mspabi_fixdli)
+                  00013860    00000066                            : cpy_tbl.obj (.text:copy_in)
+                  000138c6    00000062                            : atoi.obj (.text:atoi)
+                  00013928    00000058                            : div32u.obj (.text)
+                  00013980    00000056     onewire.obj (.text:OneWireWrite)
+                  000139d6    0000004e     rts430x_lc_rd_eabi.lib : _printfi.obj (.text:_fcpy)
+                  00013a24    0000004a     onewire.obj (.text:OneWireReset)
+                  00013a6e    0000004a     rts430x_lc_rd_eabi.lib : fs_cmp.obj (.text)
+                  00013ab8    00000044                            : sprintf.obj (.text:sprintf)
+                  00013afc    00000040                            : div32s.obj (.text)
+                  00013b3c    0000003e                            : asr32.obj (.text:l_asr_const)
+                  00013b7a    0000003e                            : lsl32.obj (.text:l_lsl_const)
+                  00013bb8    0000003e                            : lsr32.obj (.text:l_lsr_const)
+                  00013bf6    0000003c     onewire.obj (.text:OneWireReadBit)
+                  00013c32    0000003a     rts430x_lc_rd_eabi.lib : lsl64.obj (.text:__mspabi_sllll)
+                  00013c6c    0000003a                            : lsr64.obj (.text:__mspabi_srlll)
+                  00013ca6    00000036                            : fs_itof.obj (.text)
+                  00013cdc    00000032                            : subd.obj (.text:__mspabi_subd)
+                  00013d0e    00000030     clock.obj (.text:clockConfig)
+                  00013d3e    0000002e     rts430x_lc_rd_eabi.lib : negd.obj (.text:__mspabi_negd)
+                  00013d6c    0000002e                            : s_copysign.obj (.text:copysign)
+                  00013d9a    00000028                            : fixdi.obj (.text:__mspabi_fixdi)
+                  00013dc2    00000028     uart.obj (.text:uartConfig)
+                  00013dea    00000024     rts430x_lc_rd_eabi.lib : mult32_f5hw.obj (.text)
+                  00013e0e    00000022     onewire.obj (.text:DS2784ReadRegister)
+                  00013e30    00000022     onewire.obj (.text:OWReadByte)
+                  00013e52    00000020     rts430x_lc_rd_eabi.lib : sprintf.obj (.text:_outs)
+                  00013e72    00000020     uart.obj (.text:uartTX)
+                  00013e92    0000001e     rts430x_lc_rd_eabi.lib : memccpy.obj (.text:memccpy)
+                  00013eb0    0000001c     onewire.obj (.text:OWWriteByte)
+                  00013ecc    0000001c     rts430x_lc_rd_eabi.lib : strchr.obj (.text:strchr)
+                  00013ee8    0000001a     onewire.obj (.text:inp)
+                  00013f02    00000018     rts430x_lc_rd_eabi.lib : mult16_f5hw.obj (.text)
+                  00013f1a    00000016                            : memset.obj (.text:memset)
+                  00013f30    00000016                            : div16u.obj (.text)
+                  00013f46    00000016     timer.obj (.text:timerConfig)
+                  00013f5c    00000014     rts430x_lc_rd_eabi.lib : sprintf.obj (.text:_outc)
+                  00013f70    00000014                            : memcpy.obj (.text:memcpy)
+                  00013f84    00000014     onewire.obj (.text:outp)
+                  00013f98    00000012     rts430x_lc_rd_eabi.lib : copy_decompress_none.obj (.text:decompress:none:__TI_decompress_none)
+                  00013faa    00000012                            : toupper.obj (.text:toupper)
+                  00013fbc    00000010                            : asr32.obj (.text:l_asr)
+                  00013fcc    00000010                            : lsl32.obj (.text:l_lsl)
+                  00013fdc    00000010                            : lsr32.obj (.text:l_lsr)
+                  00013fec    0000000e     main.obj (.text:MSP430config)
+                  00013ffa    0000000e     rts430x_lc_rd_eabi.lib : strlen.obj (.text:strlen)
+                  00014008    0000000c                            : fltid.obj (.text:__mspabi_fltid)
+                  00014014    0000000a                            : abs.obj (.text:abs)
+                  0001401e    0000000a                            : fs_neg.obj (.text)
+                  00014028    00000006                            : fltud.obj (.text:__mspabi_fltud)
+                  0001402e    00000006                            : exit.obj (.text:abort)
+                  00014034    00000004                            : pre_init.obj (.text:_system_pre_init)
+                  00014038    00000002                            : startup.obj (.text:_system_post_cinit)
 
 MODULE SUMMARY
 
        Module                     code    ro data   rw data
        ------                     ----    -------   -------
     .\
-       main.obj                   512     8         0      
+       main.obj                   640     8         0      
     +--+--------------------------+-------+---------+---------+
-       Total:                     512     8         0      
+       Total:                     640     8         0      
                                                            
     .\source\
        onewire.obj                640     0         0      
@@ -343,6 +345,7 @@ MODULE SUMMARY
        fltlid.obj                 158     0         0      
        cvtdf.obj                  140     0         0      
        autoinit_wdt.obj           130     0         0      
+       fltuld.obj                 128     0         0      
        ltoa.obj                   128     0         0      
        copy_decompress_lzss.obj   120     0         0      
        sprintf.obj                120     0         0      
@@ -379,6 +382,7 @@ MODULE SUMMARY
        fs_neg.obj                 10      0         0      
        isr_trap.obj               8       0         0      
        exit.obj                   6       0         0      
+       fltud.obj                  6       0         0      
        pre_init.obj               4       0         0      
        boot.obj                   0       2         0      
        errno.obj                  0       0         2      
@@ -412,12 +416,12 @@ MODULE SUMMARY
        int62.obj                  0       2         0      
        startup.obj                2       0         0      
     +--+--------------------------+-------+---------+---------+
-       Total:                     14798   353       2      
+       Total:                     14932   353       2      
                                                            
        Stack:                     0       0         160    
        Linker Generated:          0       22        0      
     +--+--------------------------+-------+---------+---------+
-       Grand Total:               16214   389       162    
+       Grand Total:               16476   389       162    
 
 
 LINKER GENERATED COPY TABLES
@@ -539,7 +543,7 @@ address   name
 00000486  BAKMEM3_L               
 000004be  BCD2BIN                 
 000004bc  BIN2BCD                 
-00013f28  C$$EXIT                 
+0001402e  C$$EXIT                 
 000008c0  CBCTL0                  
 000008c1  CBCTL0_H                
 000008c0  CBCTL0_L                
@@ -657,8 +661,8 @@ address   name
 0000050e  DMAIV                   
 0000050f  DMAIV_H                 
 0000050e  DMAIV_L                 
-00012b44  DS2784Config            
-00013d0e  DS2784ReadRegister      
+00012bc4  DS2784Config            
+00013e0e  DS2784ReadRegister      
 00000140  FCTL1                   
 00000141  FCTL1_H                 
 00000140  FCTL1_L                 
@@ -786,7 +790,7 @@ address   name
 000004c2  MPYS_L                  
 000004c1  MPY_H                   
 000004c0  MPY_L                   
-00013eec  MSP430config            
+00013fec  MSP430config            
 000004c8  OP2                     
 000004e2  OP2H                    
 000004e3  OP2H_H                  
@@ -796,11 +800,11 @@ address   name
 000004e0  OP2L_L                  
 000004c9  OP2_H                   
 000004c8  OP2_L                   
-00013d30  OWReadByte              
-00013db0  OWWriteByte             
-00013af6  OneWireReadBit          
-00013924  OneWireReset            
-00013880  OneWireWrite            
+00013e30  OWReadByte              
+00013eb0  OWWriteByte             
+00013bf6  OneWireReadBit          
+00013a24  OneWireReset            
+00013980  OneWireWrite            
 0000020e  P1IV                    
 0000021e  P2IV                    
 000001d0  P2MAP01                 
@@ -1411,9 +1415,9 @@ UNDEFED   __TI_BINIT_Limit
 UNDEFED   __TI_INITARRAY_Base     
 UNDEFED   __TI_INITARRAY_Limit    
 0000801a  __TI_ISR_TRAP           
-0001361c  __TI_decompress_lzss    
-00013e98  __TI_decompress_none    
-00011438  __TI_frcaddd            
+0001371c  __TI_decompress_lzss    
+00013f98  __TI_decompress_none    
+000116aa  __TI_frcaddd            
 00010000  __TI_frcdivd            
 00010a94  __TI_frcmpyd            
 0000ffc6  __TI_int35              
@@ -1445,122 +1449,124 @@ UNDEFED   __TI_INITARRAY_Limit
 0000fffa  __TI_int61              
 0000fffc  __TI_int62              
 ffffffff  __TI_pprof_out_hndl     
-00011680  __TI_printfi            
+000118f2  __TI_printfi            
 ffffffff  __TI_prof_data_size     
 ffffffff  __TI_prof_data_start    
-00012fe0  __TI_renormd            
+00013060  __TI_renormd            
 ffffffff  __c_args__              
 000107b4  __mspabi_addd           
-00012e50  __mspabi_cmpd           
-0001396e  __mspabi_cmpf           
-0001339c  __mspabi_cvtdf          
-00013694  __mspabi_cvtfd          
-00011adc  __mspabi_divd           
-000139fc  __mspabi_divli          
-00013e30  __mspabi_divu           
-00013828  __mspabi_divul          
+00012ed0  __mspabi_cmpd           
+00013a6e  __mspabi_cmpf           
+0001341c  __mspabi_cvtdf          
+00013794  __mspabi_cvtfd          
+00011d4e  __mspabi_divd           
+00013afc  __mspabi_divli          
+00013f30  __mspabi_divu           
+00013928  __mspabi_divul          
 00010466  __mspabi_divull         
-00013c9a  __mspabi_fixdi          
-000136fa  __mspabi_fixdli         
-00013f08  __mspabi_fltid          
-00013ba6  __mspabi_fltif          
-000131de  __mspabi_fltlid         
-00010d14  __mspabi_mpyd           
-00012f28  __mspabi_mpyf           
-00013e02  __mspabi_mpyi_f5hw      
-00013cea  __mspabi_mpyl_f5hw      
-00013c3e  __mspabi_negd           
-00013f1e  __mspabi_negf           
-000139fc  __mspabi_remli          
-00013e30  __mspabi_remu           
-00013828  __mspabi_remul          
-00013ecc  __mspabi_slll           
-00013ab2  __mspabi_slll_1         
-00013a8e  __mspabi_slll_10        
-00013a8a  __mspabi_slll_11        
-00013a86  __mspabi_slll_12        
-00013a82  __mspabi_slll_13        
-00013a7e  __mspabi_slll_14        
-00013a7a  __mspabi_slll_15        
-00013aae  __mspabi_slll_2         
-00013aaa  __mspabi_slll_3         
-00013aa6  __mspabi_slll_4         
-00013aa2  __mspabi_slll_5         
-00013a9e  __mspabi_slll_6         
-00013a9a  __mspabi_slll_7         
-00013a96  __mspabi_slll_8         
-00013a92  __mspabi_slll_9         
-00013b32  __mspabi_sllll          
-00013ebc  __mspabi_sral           
-00013a74  __mspabi_sral_1         
-00013a50  __mspabi_sral_10        
-00013a4c  __mspabi_sral_11        
-00013a48  __mspabi_sral_12        
-00013a44  __mspabi_sral_13        
-00013a40  __mspabi_sral_14        
-00013a3c  __mspabi_sral_15        
-00013a70  __mspabi_sral_2         
-00013a6c  __mspabi_sral_3         
-00013a68  __mspabi_sral_4         
-00013a64  __mspabi_sral_5         
-00013a60  __mspabi_sral_6         
-00013a5c  __mspabi_sral_7         
-00013a58  __mspabi_sral_8         
-00013a54  __mspabi_sral_9         
-00013edc  __mspabi_srll           
-00013af0  __mspabi_srll_1         
-00013acc  __mspabi_srll_10        
-00013ac8  __mspabi_srll_11        
-00013ac4  __mspabi_srll_12        
-00013ac0  __mspabi_srll_13        
-00013abc  __mspabi_srll_14        
-00013ab8  __mspabi_srll_15        
-00013aec  __mspabi_srll_2         
-00013ae8  __mspabi_srll_3         
-00013ae4  __mspabi_srll_4         
-00013ae0  __mspabi_srll_5         
-00013adc  __mspabi_srll_6         
-00013ad8  __mspabi_srll_7         
-00013ad4  __mspabi_srll_8         
-00013ad0  __mspabi_srll_9         
-00013b6c  __mspabi_srlll          
-00013bdc  __mspabi_subd           
-00013428  _auto_init_hold_wdt     
+00013d9a  __mspabi_fixdi          
+000137fa  __mspabi_fixdli         
+00014008  __mspabi_fltid          
+00013ca6  __mspabi_fltif          
+0001325e  __mspabi_fltlid         
+00014028  __mspabi_fltud          
+0001352a  __mspabi_fltuld         
+00010f86  __mspabi_mpyd           
+00012fa8  __mspabi_mpyf           
+00013f02  __mspabi_mpyi_f5hw      
+00013dea  __mspabi_mpyl_f5hw      
+00013d3e  __mspabi_negd           
+0001401e  __mspabi_negf           
+00013afc  __mspabi_remli          
+00013f30  __mspabi_remu           
+00013928  __mspabi_remul          
+00013fcc  __mspabi_slll           
+00013bb2  __mspabi_slll_1         
+00013b8e  __mspabi_slll_10        
+00013b8a  __mspabi_slll_11        
+00013b86  __mspabi_slll_12        
+00013b82  __mspabi_slll_13        
+00013b7e  __mspabi_slll_14        
+00013b7a  __mspabi_slll_15        
+00013bae  __mspabi_slll_2         
+00013baa  __mspabi_slll_3         
+00013ba6  __mspabi_slll_4         
+00013ba2  __mspabi_slll_5         
+00013b9e  __mspabi_slll_6         
+00013b9a  __mspabi_slll_7         
+00013b96  __mspabi_slll_8         
+00013b92  __mspabi_slll_9         
+00013c32  __mspabi_sllll          
+00013fbc  __mspabi_sral           
+00013b74  __mspabi_sral_1         
+00013b50  __mspabi_sral_10        
+00013b4c  __mspabi_sral_11        
+00013b48  __mspabi_sral_12        
+00013b44  __mspabi_sral_13        
+00013b40  __mspabi_sral_14        
+00013b3c  __mspabi_sral_15        
+00013b70  __mspabi_sral_2         
+00013b6c  __mspabi_sral_3         
+00013b68  __mspabi_sral_4         
+00013b64  __mspabi_sral_5         
+00013b60  __mspabi_sral_6         
+00013b5c  __mspabi_sral_7         
+00013b58  __mspabi_sral_8         
+00013b54  __mspabi_sral_9         
+00013fdc  __mspabi_srll           
+00013bf0  __mspabi_srll_1         
+00013bcc  __mspabi_srll_10        
+00013bc8  __mspabi_srll_11        
+00013bc4  __mspabi_srll_12        
+00013bc0  __mspabi_srll_13        
+00013bbc  __mspabi_srll_14        
+00013bb8  __mspabi_srll_15        
+00013bec  __mspabi_srll_2         
+00013be8  __mspabi_srll_3         
+00013be4  __mspabi_srll_4         
+00013be0  __mspabi_srll_5         
+00013bdc  __mspabi_srll_6         
+00013bd8  __mspabi_srll_7         
+00013bd4  __mspabi_srll_8         
+00013bd0  __mspabi_srll_9         
+00013c6c  __mspabi_srlll          
+00013cdc  __mspabi_subd           
+000134a8  _auto_init_hold_wdt     
 00008000  _c_int00_noargs_noexit  
 00008022  _ctypes_                
 0000fffe  _reset_vector           
 00006360  _stack                  
-00013f32  _system_post_cinit      
-00013f2e  _system_pre_init        
-00013f28  abort                   
-00013f14  abs                     
-000137c6  atoi                    
-00013c0e  clockConfig             
-00013760  copy_in                 
-00013c6c  copysign                
-00013c6c  copysignl               
+00014038  _system_post_cinit      
+00014034  _system_pre_init        
+0001402e  abort                   
+00014014  abs                     
+000138c6  atoi                    
+00013d0e  clockConfig             
+00013860  copy_in                 
+00013d6c  copysign                
+00013d6c  copysignl               
 00002400  errno                   
-00013138  frexp                   
-00013138  frexpl                  
-00013de8  inp                     
-00012442  ldexp                   
-00012442  ldexpl                  
-000134aa  ltoa                    
-00011cfe  main                    
-00013d92  memccpy                 
-00013e70  memcpy                  
-00013e1a  memset                  
-00013e84  outp                    
-00012442  scalbn                  
-00012442  scalbnl                 
-000139b8  sprintf                 
-00013dcc  strchr                  
-00013efa  strlen                  
-00013e46  timerConfig             
-00013eaa  toupper                 
-00013cc2  uartConfig              
-00013d72  uartTX                  
-0001352a  uartTXFloat             
+000131b8  frexp                   
+000131b8  frexpl                  
+00013ee8  inp                     
+000124c2  ldexp                   
+000124c2  ldexpl                  
+000135aa  ltoa                    
+00010d14  main                    
+00013e92  memccpy                 
+00013f70  memcpy                  
+00013f1a  memset                  
+00013f84  outp                    
+000124c2  scalbn                  
+000124c2  scalbnl                 
+00013ab8  sprintf                 
+00013ecc  strchr                  
+00013ffa  strlen                  
+00013f46  timerConfig             
+00013faa  toupper                 
+00013dc2  uartConfig              
+00013e72  uartTX                  
+0001362a  uartTXFloat             
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -2565,124 +2571,126 @@ address   name
 00010466  __mspabi_divull         
 000107b4  __mspabi_addd           
 00010a94  __TI_frcmpyd            
-00010d14  __mspabi_mpyd           
-00011438  __TI_frcaddd            
-00011680  __TI_printfi            
-00011adc  __mspabi_divd           
-00011cfe  main                    
-00012442  ldexp                   
-00012442  ldexpl                  
-00012442  scalbn                  
-00012442  scalbnl                 
-00012b44  DS2784Config            
-00012e50  __mspabi_cmpd           
-00012f28  __mspabi_mpyf           
-00012fe0  __TI_renormd            
-00013138  frexp                   
-00013138  frexpl                  
-000131de  __mspabi_fltlid         
-0001339c  __mspabi_cvtdf          
-00013428  _auto_init_hold_wdt     
-000134aa  ltoa                    
-0001352a  uartTXFloat             
-0001361c  __TI_decompress_lzss    
-00013694  __mspabi_cvtfd          
-000136fa  __mspabi_fixdli         
-00013760  copy_in                 
-000137c6  atoi                    
-00013828  __mspabi_divul          
-00013828  __mspabi_remul          
-00013880  OneWireWrite            
-00013924  OneWireReset            
-0001396e  __mspabi_cmpf           
-000139b8  sprintf                 
-000139fc  __mspabi_divli          
-000139fc  __mspabi_remli          
-00013a3c  __mspabi_sral_15        
-00013a40  __mspabi_sral_14        
-00013a44  __mspabi_sral_13        
-00013a48  __mspabi_sral_12        
-00013a4c  __mspabi_sral_11        
-00013a50  __mspabi_sral_10        
-00013a54  __mspabi_sral_9         
-00013a58  __mspabi_sral_8         
-00013a5c  __mspabi_sral_7         
-00013a60  __mspabi_sral_6         
-00013a64  __mspabi_sral_5         
-00013a68  __mspabi_sral_4         
-00013a6c  __mspabi_sral_3         
-00013a70  __mspabi_sral_2         
-00013a74  __mspabi_sral_1         
-00013a7a  __mspabi_slll_15        
-00013a7e  __mspabi_slll_14        
-00013a82  __mspabi_slll_13        
-00013a86  __mspabi_slll_12        
-00013a8a  __mspabi_slll_11        
-00013a8e  __mspabi_slll_10        
-00013a92  __mspabi_slll_9         
-00013a96  __mspabi_slll_8         
-00013a9a  __mspabi_slll_7         
-00013a9e  __mspabi_slll_6         
-00013aa2  __mspabi_slll_5         
-00013aa6  __mspabi_slll_4         
-00013aaa  __mspabi_slll_3         
-00013aae  __mspabi_slll_2         
-00013ab2  __mspabi_slll_1         
-00013ab8  __mspabi_srll_15        
-00013abc  __mspabi_srll_14        
-00013ac0  __mspabi_srll_13        
-00013ac4  __mspabi_srll_12        
-00013ac8  __mspabi_srll_11        
-00013acc  __mspabi_srll_10        
-00013ad0  __mspabi_srll_9         
-00013ad4  __mspabi_srll_8         
-00013ad8  __mspabi_srll_7         
-00013adc  __mspabi_srll_6         
-00013ae0  __mspabi_srll_5         
-00013ae4  __mspabi_srll_4         
-00013ae8  __mspabi_srll_3         
-00013aec  __mspabi_srll_2         
-00013af0  __mspabi_srll_1         
-00013af6  OneWireReadBit          
-00013b32  __mspabi_sllll          
-00013b6c  __mspabi_srlll          
-00013ba6  __mspabi_fltif          
-00013bdc  __mspabi_subd           
-00013c0e  clockConfig             
-00013c3e  __mspabi_negd           
-00013c6c  copysign                
-00013c6c  copysignl               
-00013c9a  __mspabi_fixdi          
-00013cc2  uartConfig              
-00013cea  __mspabi_mpyl_f5hw      
-00013d0e  DS2784ReadRegister      
-00013d30  OWReadByte              
-00013d72  uartTX                  
-00013d92  memccpy                 
-00013db0  OWWriteByte             
-00013dcc  strchr                  
-00013de8  inp                     
-00013e02  __mspabi_mpyi_f5hw      
-00013e1a  memset                  
-00013e30  __mspabi_divu           
-00013e30  __mspabi_remu           
-00013e46  timerConfig             
-00013e70  memcpy                  
-00013e84  outp                    
-00013e98  __TI_decompress_none    
-00013eaa  toupper                 
-00013ebc  __mspabi_sral           
-00013ecc  __mspabi_slll           
-00013edc  __mspabi_srll           
-00013eec  MSP430config            
-00013efa  strlen                  
-00013f08  __mspabi_fltid          
-00013f14  abs                     
-00013f1e  __mspabi_negf           
-00013f28  C$$EXIT                 
-00013f28  abort                   
-00013f2e  _system_pre_init        
-00013f32  _system_post_cinit      
+00010d14  main                    
+00010f86  __mspabi_mpyd           
+000116aa  __TI_frcaddd            
+000118f2  __TI_printfi            
+00011d4e  __mspabi_divd           
+000124c2  ldexp                   
+000124c2  ldexpl                  
+000124c2  scalbn                  
+000124c2  scalbnl                 
+00012bc4  DS2784Config            
+00012ed0  __mspabi_cmpd           
+00012fa8  __mspabi_mpyf           
+00013060  __TI_renormd            
+000131b8  frexp                   
+000131b8  frexpl                  
+0001325e  __mspabi_fltlid         
+0001341c  __mspabi_cvtdf          
+000134a8  _auto_init_hold_wdt     
+0001352a  __mspabi_fltuld         
+000135aa  ltoa                    
+0001362a  uartTXFloat             
+0001371c  __TI_decompress_lzss    
+00013794  __mspabi_cvtfd          
+000137fa  __mspabi_fixdli         
+00013860  copy_in                 
+000138c6  atoi                    
+00013928  __mspabi_divul          
+00013928  __mspabi_remul          
+00013980  OneWireWrite            
+00013a24  OneWireReset            
+00013a6e  __mspabi_cmpf           
+00013ab8  sprintf                 
+00013afc  __mspabi_divli          
+00013afc  __mspabi_remli          
+00013b3c  __mspabi_sral_15        
+00013b40  __mspabi_sral_14        
+00013b44  __mspabi_sral_13        
+00013b48  __mspabi_sral_12        
+00013b4c  __mspabi_sral_11        
+00013b50  __mspabi_sral_10        
+00013b54  __mspabi_sral_9         
+00013b58  __mspabi_sral_8         
+00013b5c  __mspabi_sral_7         
+00013b60  __mspabi_sral_6         
+00013b64  __mspabi_sral_5         
+00013b68  __mspabi_sral_4         
+00013b6c  __mspabi_sral_3         
+00013b70  __mspabi_sral_2         
+00013b74  __mspabi_sral_1         
+00013b7a  __mspabi_slll_15        
+00013b7e  __mspabi_slll_14        
+00013b82  __mspabi_slll_13        
+00013b86  __mspabi_slll_12        
+00013b8a  __mspabi_slll_11        
+00013b8e  __mspabi_slll_10        
+00013b92  __mspabi_slll_9         
+00013b96  __mspabi_slll_8         
+00013b9a  __mspabi_slll_7         
+00013b9e  __mspabi_slll_6         
+00013ba2  __mspabi_slll_5         
+00013ba6  __mspabi_slll_4         
+00013baa  __mspabi_slll_3         
+00013bae  __mspabi_slll_2         
+00013bb2  __mspabi_slll_1         
+00013bb8  __mspabi_srll_15        
+00013bbc  __mspabi_srll_14        
+00013bc0  __mspabi_srll_13        
+00013bc4  __mspabi_srll_12        
+00013bc8  __mspabi_srll_11        
+00013bcc  __mspabi_srll_10        
+00013bd0  __mspabi_srll_9         
+00013bd4  __mspabi_srll_8         
+00013bd8  __mspabi_srll_7         
+00013bdc  __mspabi_srll_6         
+00013be0  __mspabi_srll_5         
+00013be4  __mspabi_srll_4         
+00013be8  __mspabi_srll_3         
+00013bec  __mspabi_srll_2         
+00013bf0  __mspabi_srll_1         
+00013bf6  OneWireReadBit          
+00013c32  __mspabi_sllll          
+00013c6c  __mspabi_srlll          
+00013ca6  __mspabi_fltif          
+00013cdc  __mspabi_subd           
+00013d0e  clockConfig             
+00013d3e  __mspabi_negd           
+00013d6c  copysign                
+00013d6c  copysignl               
+00013d9a  __mspabi_fixdi          
+00013dc2  uartConfig              
+00013dea  __mspabi_mpyl_f5hw      
+00013e0e  DS2784ReadRegister      
+00013e30  OWReadByte              
+00013e72  uartTX                  
+00013e92  memccpy                 
+00013eb0  OWWriteByte             
+00013ecc  strchr                  
+00013ee8  inp                     
+00013f02  __mspabi_mpyi_f5hw      
+00013f1a  memset                  
+00013f30  __mspabi_divu           
+00013f30  __mspabi_remu           
+00013f46  timerConfig             
+00013f70  memcpy                  
+00013f84  outp                    
+00013f98  __TI_decompress_none    
+00013faa  toupper                 
+00013fbc  __mspabi_sral           
+00013fcc  __mspabi_slll           
+00013fdc  __mspabi_srll           
+00013fec  MSP430config            
+00013ffa  strlen                  
+00014008  __mspabi_fltid          
+00014014  abs                     
+0001401e  __mspabi_negf           
+00014028  __mspabi_fltud          
+0001402e  C$$EXIT                 
+0001402e  abort                   
+00014034  _system_pre_init        
+00014038  _system_post_cinit      
 ffffffff  __TI_pprof_out_hndl     
 ffffffff  __TI_prof_data_size     
 ffffffff  __TI_prof_data_start    
@@ -2692,4 +2700,4 @@ UNDEFED   __TI_BINIT_Limit
 UNDEFED   __TI_INITARRAY_Base     
 UNDEFED   __TI_INITARRAY_Limit    
 
-[1124 symbols]
+[1126 symbols]
