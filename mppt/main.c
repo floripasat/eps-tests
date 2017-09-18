@@ -24,6 +24,14 @@ int main(void) {
 	debugLedDir |= debugLedPin;
 	debugLedPort |= debugLedPin;
 
+	load5VEnablePort |= load5VEnablePin;	// enable 5V load regulator
+	load5VPSPort |= load5VPSPin;			// disable 5V load regulator PS
+
+	EPS3V3PSPort |= EPS3V3PSPin;			// disable 3V3 EPS regulator PS
+
+	load3V3EnablePort |= load3V3EnablePin;	// enable 3V3 load regulator
+	load3V3PSPort |= load3V3PSPin;			// disable 3V3 load regulator PS
+
     while(1){
 		while(!(TA0CCTL0 && CCIFG));		// wait until interrupt is triggered (1 second is passed)
 		timerDebugPort ^= timerDebugPin;	// set debug pin
@@ -63,4 +71,12 @@ void MSP430config(void){
 	clockConfig();
 	timerConfig();
 	uartConfig();
+
+	load5VEnableDir |= load5VEnablePin;		// set 5V load regulator enable as output
+	load5VPSDir |= load5VPSPin;				// set 5V load regulator PS as output
+
+	EPS3V3PSDir |= EPS3V3PSPin;				// set 3V3 EPS regulator PS as output
+
+	load3V3EnableDir |= load3V3EnablePin;	// set 3V3 load regulator enable as output
+	load3V3PSDir |= load3V3PSPin;			// set 3V3 load regulator PS as output
 }
