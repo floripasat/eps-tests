@@ -31,6 +31,9 @@ int main(void) {
 		batteryMeasurements.current = (DS2784ReadRegister(current_MSB_register) << 8) + DS2784ReadRegister(current_LSB_register);
 		uartTXFloat(batteryMeasurements.current*batteryCurrentUnit);
 		uartTX(",");
+		batteryMeasurements.averageCurrent = (DS2784ReadRegister(average_current_MSB_register) << 8) + DS2784ReadRegister(average_current_LSB_register);
+		uartTXFloat(batteryMeasurements.averageCurrent*batteryCurrentUnit);
+		uartTX(",");
     }
 
 	return 0;
