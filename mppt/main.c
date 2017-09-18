@@ -42,6 +42,9 @@ int main(void) {
 		adcChannels.VpanelsVoltage = adcRead(VpanelsAdcChannel);
 		uartTXFloat(adcChannels.VpanelsVoltage*VpanelsUnit);
 		uartTX(",");
+		adcChannels.pXPanelVoltage = adcRead(pXPanelVoltageAdcChannel);
+		uartTXFloat(adcChannels.pXPanelVoltage*panelVoltageUnit);
+		uartTX(",");
 
 		uint8_t auxString[4];
 
