@@ -28,6 +28,9 @@ int main(void) {
 		batteryMeasurements.voltage = (DS2784ReadRegister(voltage_MSB_register) << 8) + DS2784ReadRegister(voltage_LSB_register);
 		uartTXFloat((batteryMeasurements.voltage >> 5)*batteryVoltageUnit);
 		uartTX(",");
+		batteryMeasurements.current = (DS2784ReadRegister(current_MSB_register) << 8) + DS2784ReadRegister(current_LSB_register);
+		uartTXFloat(batteryMeasurements.current*batteryCurrentUnit);
+		uartTX(",");
     }
 
 	return 0;
