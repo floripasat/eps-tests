@@ -73,6 +73,9 @@ int main(void) {
 		adcChannels.pZPanelCurrent = adcRead(pZPanelCurrentAdcChannel);
 		uartTXFloat(adcChannels.pZPanelCurrent*panelCurrentUnit);
 		uartTX(",");
+		adcChannels.loadCurrent = adcRead(loadCurrentAdcChannel);
+		uartTXFloat(adcChannels.loadCurrent*loadCurrentUnit);
+		uartTX(",");
 
 		uint8_t auxString[4];
 
