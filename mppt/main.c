@@ -34,6 +34,13 @@ int main(void) {
 	load3V3EnablePort |= load3V3EnablePin;	// enable 3V3 load regulator
 	load3V3PSPort |= load3V3PSPin;			// disable 3V3 load regulator PS
 
+	pXmpptShutdownPort &= ~pXmpptShutdownPin;	// disable +X mppt
+	nXmpptShutdownPort &= ~nXmpptShutdownPin;	// disable -X mppt
+	pYmpptShutdownPort &= ~pYmpptShutdownPin;	// disable +Y mppt
+	nYmpptShutdownPort &= ~nYmpptShutdownPin;	// disable -Y mppt
+	pZmpptShutdownPort &= ~pZmpptShutdownPin;	// disable +Z mppt
+	nZmpptShutdownPort &= ~nZmpptShutdownPin;	// disable -Z mppt
+
     while(1){
 		while(!(TA0CCTL0 && CCIFG));		// wait until interrupt is triggered (1 second is passed)
 		timerDebugPort ^= timerDebugPin;	// set debug pin
@@ -89,4 +96,11 @@ void MSP430config(void){
 
 	load3V3EnableDir |= load3V3EnablePin;	// set 3V3 load regulator enable as output
 	load3V3PSDir |= load3V3PSPin;			// set 3V3 load regulator PS as output
+
+ 	pXmpptShutdownDir |= pXmpptShutdownPin;		// set +X mppt shutdown as output
+ 	nXmpptShutdownDir |= nXmpptShutdownPin;		// set -X mppt shutdown as output
+ 	pYmpptShutdownDir |= pYmpptShutdownPin;		// set +Y mppt shutdown as output
+ 	nYmpptShutdownDir |= nYmpptShutdownPin;		// set -Y mppt shutdown as output
+ 	pZmpptShutdownDir |= pZmpptShutdownPin;		// set +Z mppt shutdown as output
+ 	nZmpptShutdownDir |= nZmpptShutdownPin;		// set -Z mppt shutdown as output
 }
