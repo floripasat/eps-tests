@@ -1,5 +1,6 @@
 #include <msp430.h> 
 #include "hal.h"
+#include "clock.h"
 
 /*
  * main.c
@@ -18,5 +19,5 @@ int main(void) {
 }
 
 void MSP430config(void){
-
+	clockConfig();
 }
