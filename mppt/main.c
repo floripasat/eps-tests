@@ -1,4 +1,5 @@
 #include <msp430.h> 
+#include <stdio.h>
 #include "hal.h"
 #include "clock.h"
 #include "timer.h"
@@ -25,6 +26,8 @@ int main(void) {
 		timerDebugPort ^= timerDebugPin;	// set debug pin
 		TA0CCTL0 &= ~CCIFG;					// clear interrupt flag
 
+		uint8_t auxString[4];
+
 		batteryMeasurements.voltage = (DS2784ReadRegister(voltage_MSB_register) << 8) + DS2784ReadRegister(voltage_LSB_register);
 		uartTXFloat((batteryMeasurements.voltage >> 5)*batteryVoltageUnit);
 		uartTX(",");
@@ -36,6 +39,10 @@ int main(void) {
 		uartTX(",");
 		batteryMeasurements.temperature = (DS2784ReadRegister(temperature_MSB_register) << 8) + DS2784ReadRegister(temperature_LSB_register);
 		uartTXFloat((batteryMeasurements.temperature >> 5)*batteryMonitorTemperatureUnit);
+		uartTX(",");
+		batteryMeasurements.protectionRegister = DS2784ReadRegister(protection_register);
+		sprintf(auxString, "%#04X", batteryMeasurements.protectionRegister);
+		uartTX(auxString);
 		uartTX(",");
     }
 
