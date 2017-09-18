@@ -21,6 +21,9 @@ int main(void) {
 
     DS2784Config();
 
+	debugLedDir |= debugLedPin;
+	debugLedPort |= debugLedPin;
+
     while(1){
 		while(!(TA0CCTL0 && CCIFG));		// wait until interrupt is triggered (1 second is passed)
 		timerDebugPort ^= timerDebugPin;	// set debug pin
