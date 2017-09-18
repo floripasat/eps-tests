@@ -2,6 +2,7 @@
 #include "hal.h"
 #include "clock.h"
 #include "timer.h"
+#include "uart.h"
 
 /*
  * main.c
@@ -18,6 +19,8 @@ int main(void) {
 		while(!(TA0CCTL0 && CCIFG));		// wait until interrupt is triggered (1 second is passed)
 		timerDebugPort ^= timerDebugPin;	// set debug pin
 		TA0CCTL0 &= ~CCIFG;					// clear interrupt flag
+
+		uartTX("test");
     }
 
 	return 0;
@@ -26,4 +29,5 @@ int main(void) {
 void MSP430config(void){
 	clockConfig();
 	timerConfig();
+	uartConfig();
 }
