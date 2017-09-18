@@ -71,6 +71,9 @@ int main(void) {
 		adcChannels.pYPanelCurrent = adcRead(pYPanelCurrentAdcChannel);
 		uartTXFloat(adcChannels.pYPanelCurrent*panelCurrentUnit);
 		uartTX(",");
+		adcChannels.nYPanelCurrent = adcRead(nYPanelCurrentAdcChannel);
+		uartTXFloat(adcChannels.nYPanelCurrent*panelCurrentUnit);
+		uartTX(",");
 
 		uint8_t auxString[4];
 
