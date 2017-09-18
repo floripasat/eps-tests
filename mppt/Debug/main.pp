@@ -11,6 +11,7 @@ main.obj: C:/Code/eps-tests/mppt/include/clock.h
 main.obj: C:/Code/eps-tests/mppt/include/timer.h
 main.obj: C:/Code/eps-tests/mppt/include/uart.h
 main.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_17.6.0.STS/include/stdint.h
+main.obj: C:/Code/eps-tests/mppt/include/onewire.h
 
 ../main.c: 
 C:/ti/ccsv6/ccs_base/msp430/include/msp430.h: 
@@ -23,3 +24,4 @@ C:/Code/eps-tests/mppt/include/clock.h:
 C:/Code/eps-tests/mppt/include/timer.h: 
 C:/Code/eps-tests/mppt/include/uart.h: 
 C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_17.6.0.STS/include/stdint.h: 
+C:/Code/eps-tests/mppt/include/onewire.h: 
