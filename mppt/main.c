@@ -44,6 +44,10 @@ int main(void) {
 		sprintf(auxString, "%#04X", batteryMeasurements.protectionRegister);
 		uartTX(auxString);
 		uartTX(",");
+		batteryMeasurements.statusRegister = DS2784ReadRegister(status_register);
+		sprintf(auxString, "%#04X", batteryMeasurements.statusRegister);
+		uartTX(auxString);
+		uartTX(",");
     }
 
 	return 0;
