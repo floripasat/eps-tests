@@ -5,6 +5,7 @@
 #include "timer.h"
 #include "uart.h"
 #include "onewire.h"
+#include "adc.h"
 
 /*
  * main.c
@@ -16,6 +17,7 @@ int main(void) {
     WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
 	
     struct batteryMeasurements_t batteryMeasurements;
+    struct adcChannels_t adcChannels;
 
     MSP430config();
 
@@ -36,6 +38,10 @@ int main(void) {
 		while(!(TA0CCTL0 && CCIFG));		// wait until interrupt is triggered (1 second is passed)
 		timerDebugPort ^= timerDebugPin;	// set debug pin
 		TA0CCTL0 &= ~CCIFG;					// clear interrupt flag
+
+		adcChannels.VpanelsVoltage = adcRead(VpanelsAdcChannel);
+		uartTXFloat(adcChannels.VpanelsVoltage*VpanelsUnit);
+		uartTX(",");
 
 		uint8_t auxString[4];
 
@@ -70,6 +76,7 @@ int main(void) {
 void MSP430config(void){
 	clockConfig();
 	timerConfig();
+	adcConfig();
 	uartConfig();
 
 	load5VEnableDir |= load5VEnablePin;		// set 5V load regulator enable as output
