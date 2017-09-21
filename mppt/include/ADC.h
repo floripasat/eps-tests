@@ -29,7 +29,7 @@ struct adcChannels_t{
 	uint16_t nXPanelVoltage;	// -X panel voltage
 	uint16_t pYPanelVoltage;	// +Y panel voltage
 	uint16_t nYPanelVoltage;	// -Y panel voltage
-	uint16_t pZPanelVoltage;	// +Z panel voltage
+	uint16_t VchargeVoltage;	// Vcharge voltage
 };
 
 #endif /* ADC_H_ */

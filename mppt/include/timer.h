@@ -11,7 +11,7 @@
 #define TIMER_H_
 
 #include <msp430.h>
-#include "halDC.h"
+#include "hal.h"
 
 void timerConfig();
 

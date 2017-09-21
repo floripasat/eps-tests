@@ -5,29 +5,30 @@
  *      Author: Bruno Eiterer
  */
 
-#ifndef HALVLDO_H_
-#define HALVLDO_H_
+#ifndef HAL_H_
+#define HAL_H_
 
 /**** ADC Channels ****/
-#define	VpanelsAdcChannel			0x0F
+#define	VpanelsAdcChannel			0x0D
 #define	pXPanelVoltageAdcChannel	0x01
-#define	nXPanelVoltageAdcChannel	0x04
-#define	pYPanelVoltageAdcChannel	0x06
-#define	nYPanelVoltageAdcChannel	0x0D
-#define VChargeAdcChannel			0x05
+#define	nXPanelVoltageAdcChannel	0x02
+#define	pYPanelVoltageAdcChannel	0x04
+#define	nYPanelVoltageAdcChannel	0x0E
+#define	VchargeAdcChannel			0x07
 
-#define loadCurrentAdcChannel		0x02
+#define loadCurrentAdcChannel		0x06
 #define pXPanelCurrentAdcChannel	0x00
 #define nXPanelCurrentAdcChannel	0x03
-#define pYPanelCurrentAdcChannel	0x07
-#define nYPanelCurrentAdcChannel	0x0E
-#define pZPanelCurrentAdcChannel	0x0C
+#define pYPanelCurrentAdcChannel	0x05
+#define nYPanelCurrentAdcChannel	0x0C
+#define pZPanelCurrentAdcChannel	0x0F
 
 /**** ADC Units ****/
 #define VpanelsUnit	0.001220703125					// (2.5/2^12)*(100+100)/100
-#define panelVoltageUnit	0.001220703125			// (2.5/2^12)*(180+133)/180
-#define panelCurrentUnit	0.000048828125			// (2.5/2^12)/(0.05*0.025*10000)
+#define panelVoltageUnit	0.0006103515625			// (2.5/2^12)
+#define panelCurrentUnit	0.00012299275818639		// (2.5/2^12)/(0.05*0.025*3970)
 #define loadCurrentUnit		0.00014796401515152		// (2.5/2^12)/(0.05*0.025*3300)
+#define VchargeUnit			0.00106926251174812		// (2.5/2^12)*(100+133)/133
 
 /**** Regulators Enable and Power Save ****/
 #define load5VEnableDir		P1DIR
@@ -92,4 +93,39 @@
 #define batteryAccumulatedCurrentUnit	6.25*0.000001/rsense
 #define batteryMonitorTemperatureUnit	0.125
 
-#endif /* HALVLDO_H_ */
+/**** MPPT shutdown ****/
+#define pXmpptShutdownPort	P4OUT
+#define pXmpptShutdownDir	P4DIR
+#define pXmpptShutdownPin	BIT0
+
+#define nXmpptShutdownPort	P4OUT
+#define nXmpptShutdownDir	P4DIR
+#define nXmpptShutdownPin	BIT3
+
+#define pYmpptShutdownPort	P4OUT
+#define pYmpptShutdownDir	P4DIR
+#define pYmpptShutdownPin	BIT4
+
+#define nYmpptShutdownPort	P4OUT
+#define nYmpptShutdownDir	P4DIR
+#define nYmpptShutdownPin	BIT5
+
+#define pZmpptShutdownPort	P4OUT
+#define pZmpptShutdownDir	P4DIR
+#define pZmpptShutdownPin	BIT6
+
+#define nZmpptShutdownPort	P4OUT
+#define nZmpptShutdownDir	P4DIR
+#define nZmpptShutdownPin	BIT7
+
+/**** Battery Charger States ****/
+
+#define ST1Port	P3IN
+#define ST1Dir	P3DIR
+#define ST1Pin	BIT3
+
+#define ST2Port	P3IN
+#define ST2Dir	P3DIR
+#define ST2Pin	BIT4
+
+#endif /* HAL_H_ */
