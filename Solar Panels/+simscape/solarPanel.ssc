@@ -1,0 +1,48 @@
+component solarPanel
+    
+    nodes
+        p = foundation.electrical.electrical
+        n = foundation.electrical.electrical
+    end
+    
+    variables
+        i = {0, 'A'};   % panel current
+        v = {0, 'V'};   % panel voltage
+    end
+    
+    parameters(Access=private)
+        Vt_Ta = {A * 1.38e-23 * (25+273) / 1.60e-19, 'V'};
+    end
+    
+    parameters
+        Rs = {5.59404, 'Ohm'};      % series resistance
+        Rsh = {954.801, 'Ohm'};     % parallel resistance
+        A = {2.1, '1'};             % diode ideality factor
+        Ir = {2.37917e-07, 'A'};    % diode saturation current
+        Iph = {0.050, 'A'};         % panel photocurrent
+        Np = {4, '1'};              % number of parallel cells
+        Ns = {10, '1'};             % number of series cells
+        Npp = {3, '1'};             % number of parallel panels
+    end
+    
+    branches
+        i: n.i -> p.i
+    end
+    
+    equations
+        v == p.v - n.v;
+        let  
+            Vc = v/Ns;      % cell voltage
+            I0 = -(Iph - Ir*(exp((Vc)/Vt_Ta) - 1)-(Vc/Rsh))./(-1 - (Ir.*( exp((Vc)./Vt_Ta))).*Rs./Vt_Ta - Rs/Rsh);
+            I1 = I0 -(Iph - I0 - Ir.*( exp((Vc+I0.*Rs)./Vt_Ta) -1)-(Vc+I0.*Rs)./Rsh)./ (-1 - (Ir.*( exp((Vc+I0.*Rs)./Vt_Ta))).*Rs./Vt_Ta - Rs/Rsh);
+            I2 = I1 -(Iph - I1 - Ir.*( exp((Vc+I1.*Rs)./Vt_Ta) -1)-(Vc+I1.*Rs)./Rsh)./ (-1 - (Ir.*( exp((Vc+I1.*Rs)./Vt_Ta))).*Rs./Vt_Ta - Rs/Rsh);
+            I3 = I2 -(Iph - I2 - Ir.*( exp((Vc+I2.*Rs)./Vt_Ta) -1)-(Vc+I2.*Rs)./Rsh)./ (-1 - (Ir.*( exp((Vc+I2.*Rs)./Vt_Ta))).*Rs./Vt_Ta - Rs/Rsh);
+            I4 = I3 -(Iph - I3 - Ir.*( exp((Vc+I3.*Rs)./Vt_Ta) -1)-(Vc+I3.*Rs)./Rsh)./ (-1 - (Ir.*( exp((Vc+I3.*Rs)./Vt_Ta))).*Rs./Vt_Ta - Rs/Rsh);
+            I5 = I4 -(Iph - I4 - Ir.*( exp((Vc+I4.*Rs)./Vt_Ta) -1)-(Vc+I4.*Rs)./Rsh)./ (-1 - (Ir.*( exp((Vc+I4.*Rs)./Vt_Ta))).*Rs./Vt_Ta - Rs/Rsh);
+        in
+            i == I5*Npp*Np;
+        end
+    end
+end
+
+
