@@ -6,13 +6,14 @@ function Vd = V_drop_diode(I,T)
  
 k = 1.38e-23;    % Boltzman’s const
 q = 1.60e-19;    % Charge on an electron
-n = 0.9830;      % "diode quality" factor
+n = 1.00404;      % "diode quality" factor
 
 T_K = 273 + T;   % Temp in Kelvin T
 Vt = k*T_K/q;    % Thermal voltage
+Rs = 0.0084;
 
-Is_23 = 1.02696e-6;             % The saturation current at 23ºC 
+Is_23 = 1.3032e-6;             % The saturation current at 23ºC 
 Is = Is_23 + 0.127e-6 * (T-23); % The Saturation Current at Temp T
 
-Vd = n * Vt * log(I/Is);         % Forward Voltage Drop Diode
+Vd = n * Vt * log(I/Is)+I*Rs;         % Forward Voltage Drop Diode
 end
