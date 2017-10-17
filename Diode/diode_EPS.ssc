@@ -37,12 +37,14 @@ component diode_EPS
     end
     
     equations
-
-            v == a.v - k.v;
+        if i>= {0, 'A'}
+           v == a.v - k.v;
            % Is == Is_23 + 0.127e-6 * (T-23);        % The Saturation Current at Temp T
            v == n * Vt * log(i/Is)+R*i;         % Forward Voltage Drop Diode ;
-            
-        
+        else 
+            v == k.v - a.v;
+            v == abs(i) * {20000000, 'Ohm'}
+        end
     end
     
 end
