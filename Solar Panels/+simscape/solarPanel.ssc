@@ -1,5 +1,9 @@
 component solarPanel
     
+    inputs
+        I = {1000, 'W/m^2'}
+    end
+    
     nodes
         p = foundation.electrical.electrical
         n = foundation.electrical.electrical
@@ -19,7 +23,7 @@ component solarPanel
         Rsh = {954.801, 'Ohm'};     % parallel resistance
         A = {2.1, '1'};             % diode ideality factor
         Ir = {2.37917e-07, 'A'};    % diode saturation current
-        Iph = {0.050, 'A'};         % panel photocurrent
+        Iph0 = {0.050, 'A'};         % panel photocurrent
         Np = {4, '1'};              % number of parallel cells
         Ns = {10, '1'};             % number of series cells
         Npp = {3, '1'};             % number of parallel panels
@@ -33,6 +37,7 @@ component solarPanel
         v == p.v - n.v;
         let  
             Vc = v/Ns;      % cell voltage
+            Iph = Iph0*I/{1000, 'W/m^2'};
             I0 = -(Iph - Ir*(exp((Vc)/Vt_Ta) - 1)-(Vc/Rsh))./(-1 - (Ir.*( exp((Vc)./Vt_Ta))).*Rs./Vt_Ta - Rs/Rsh);
             I1 = I0 -(Iph - I0 - Ir.*( exp((Vc+I0.*Rs)./Vt_Ta) -1)-(Vc+I0.*Rs)./Rsh)./ (-1 - (Ir.*( exp((Vc+I0.*Rs)./Vt_Ta))).*Rs./Vt_Ta - Rs/Rsh);
             I2 = I1 -(Iph - I1 - Ir.*( exp((Vc+I1.*Rs)./Vt_Ta) -1)-(Vc+I1.*Rs)./Rsh)./ (-1 - (Ir.*( exp((Vc+I1.*Rs)./Vt_Ta))).*Rs./Vt_Ta - Rs/Rsh);
