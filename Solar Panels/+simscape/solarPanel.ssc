@@ -2,6 +2,8 @@ component solarPanel
     
     inputs
         I = {1000, 'W/m^2'}
+        Rsh = {954.801, 'Ohm'};     % parallel resistance
+        Ir = {2.37917e-07, 'A'};    % diode saturation current
     end
     
     nodes
@@ -19,14 +21,14 @@ component solarPanel
     end
     
     parameters
+        
         Rs = {5.59404, 'Ohm'};      % series resistance
-        Rsh = {954.801, 'Ohm'};     % parallel resistance
         A = {2.1, '1'};             % diode ideality factor
-        Ir = {2.37917e-07, 'A'};    % diode saturation current
-        Iph0 = {0.050, 'A'};         % panel photocurrent
+        Iph0 = {0.050, 'A'};        % panel photocurrent
         Np = {4, '1'};              % number of parallel cells
         Ns = {10, '1'};             % number of series cells
         Npp = {3, '1'};             % number of parallel panels
+        
     end
     
     branches
@@ -35,7 +37,7 @@ component solarPanel
     
     equations
         v == p.v - n.v;
-        let  
+        let
             Vc = v/Ns;      % cell voltage
             Iph = Iph0*I/{1000, 'W/m^2'};
             I0 = -(Iph - Ir*(exp((Vc)/Vt_Ta) - 1)-(Vc/Rsh))./(-1 - (Ir.*( exp((Vc)./Vt_Ta))).*Rs./Vt_Ta - Rs/Rsh);
