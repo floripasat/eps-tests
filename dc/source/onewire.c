@@ -166,7 +166,7 @@ void DS2784Config(void){
 	OWWriteByte(skipNetAddress);					// slave net address (only one slave on bus, CC is used)
 	OWWriteByte(writeRegisterCommand);				// write operation
 	OWWriteByte(protector_threshold_register);		// register address
-	OWWriteByte(0x61);								// value to be written
+	OWWriteByte(0x62);								// value to be written
 
 	OneWireReset();							// STATUS REGISTER
 	OWWriteByte(skipNetAddress);			// slave net address (only one slave on bus, CC is used)

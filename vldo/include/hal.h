@@ -87,7 +87,7 @@
 
 /**** DS2784 Units ****/
 
-#define	rsense							0.02
+#define	rsense							0.015
 #define batteryVoltageUnit				0.004883
 #define batteryCurrentUnit				0.0000015625/rsense
 #define batteryAccumulatedCurrentUnit	6.25*0.000001/rsense

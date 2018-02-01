@@ -29,12 +29,12 @@ void main(void){
 	debugLedDir |= debugLedPin;
 	debugLedPort |= debugLedPin;
 
-	load5VEnablePort |= load5VEnablePin;	// enable 5V load regulator
-	load5VPSPort |= load5VPSPin;			// disable 5V load regulator PS
+	//load5VEnablePort |= load5VEnablePin;	// enable 5V load regulator
+	//load5VPSPort |= load5VPSPin;			// disable 5V load regulator PS
 
 	EPS3V3PSPort |= EPS3V3PSPin;			// disable 3V3 EPS regulator PS
 
-	load3V3EnablePort |= load3V3EnablePin;	// enable 3V3 load regulator
+	load3V3EnablePort &= ~load3V3EnablePin;	// enable 3V3 load regulator
 	load3V3PSPort |= load3V3PSPin;			// disable 3V3 load regulator PS
 
 	while(1){
@@ -104,7 +104,14 @@ void main(void){
 		uartTX(",");
 		batteryMeasurements.accumulatedCurrent = (DS2784ReadRegister(accumulated_current_MSB_register) << 8) + DS2784ReadRegister(accumulated_current_LSB_register);
 		uartTXFloat(batteryMeasurements.accumulatedCurrent*batteryAccumulatedCurrentUnit);
-		uartTX(",");
+		uartTX("\r\n");
+
+		if((adcChannels.nXPanelCurrent + adcChannels.nYPanelCurrent + adcChannels.pXPanelCurrent + adcChannels.pYPanelCurrent + adcChannels.pZPanelCurrent)*panelCurrentUnit < 0.03
+				& (adcChannels.nXPanelVoltage + adcChannels.nYPanelVoltage + adcChannels.pXPanelVoltage + adcChannels.pYPanelVoltage)*panelVoltageUnit < 4){
+			load3V3EnablePort |= load3V3EnablePin;
+		}else{
+			load3V3EnablePort &= ~load3V3EnablePin;
+		}
 	}
 }
 
@@ -114,8 +121,8 @@ void MSP430config(void){
 	adcConfig();
 	uartConfig();
 
-	load5VEnableDir |= load5VEnablePin;		// set 5V load regulator enable as output
-	load5VPSDir |= load5VPSPin;				// set 5V load regulator PS as output
+	//load5VEnableDir |= load5VEnablePin;		// set 5V load regulator enable as output
+	//load5VPSDir |= load5VPSPin;				// set 5V load regulator PS as output
 
 	EPS3V3PSDir |= EPS3V3PSPin;				// set 3V3 EPS regulator PS as output
 

@@ -196,13 +196,13 @@ void DS2784Config(void){
 	OWWriteByte(skipNetAddress);						// slave net address (only one slave on bus, CC is used)
 	OWWriteByte(writeRegisterCommand);					// write operation
 	OWWriteByte(accumulated_current_MSB_register);		// register address
-	OWWriteByte(0x25);									// value to be written
+	OWWriteByte(0x1C);									// value to be written
 
 	OneWireReset();										// ACCUMULATED CURRENT - LSB REGISTER
 	OWWriteByte(skipNetAddress);						// slave net address (only one slave on bus, CC is used)
 	OWWriteByte(writeRegisterCommand);					// write operation
 	OWWriteByte(accumulated_current_LSB_register);		// register address
-	OWWriteByte(0x80);									// value to be written
+	OWWriteByte(0x20);									// value to be written
 }
 
 uint8_t DS2784ReadRegister(uint8_t register_address){
