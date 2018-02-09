@@ -28,6 +28,7 @@ component solarPanel
         Np = {4, '1'};              % number of parallel cells
         Ns = {10, '1'};             % number of series cells
         Npp = {3, '1'};             % number of parallel panels
+        efficiency = {0.3, '1'}      % efficiency, used to balance the model with the measurements
         
     end
     
@@ -39,7 +40,7 @@ component solarPanel
         v == p.v - n.v;
         let
             Vc = v/Ns;      % cell voltage
-            Iph = Iph0*I/{1000, 'W/m^2'};
+            Iph = Iph0*I/{1000, 'W/m^2'}*efficiency;
             I0 = -(Iph - Ir*(exp((Vc)/Vt_Ta) - 1)-(Vc/Rsh))./(-1 - (Ir.*( exp((Vc)./Vt_Ta))).*Rs./Vt_Ta - Rs/Rsh);
             I1 = I0 -(Iph - I0 - Ir.*( exp((Vc+I0.*Rs)./Vt_Ta) -1)-(Vc+I0.*Rs)./Rsh)./ (-1 - (Ir.*( exp((Vc+I0.*Rs)./Vt_Ta))).*Rs./Vt_Ta - Rs/Rsh);
             I2 = I1 -(Iph - I1 - Ir.*( exp((Vc+I1.*Rs)./Vt_Ta) -1)-(Vc+I1.*Rs)./Rsh)./ (-1 - (Ir.*( exp((Vc+I1.*Rs)./Vt_Ta))).*Rs./Vt_Ta - Rs/Rsh);
