@@ -27,7 +27,7 @@
 #define VpanelsUnit	0.001220703125					// (2.5/2^12)*(100+100)/100
 #define panelVoltageUnit	0.001220703125			// (2.5/2^12)*(100+100)/100
 #define panelCurrentUnit	0.000048828125			// (2.5/2^12)/(0.05*0.025*10000)
-#define loadCurrentUnit		0.00014796401515152		// (2.5/2^12)/(0.05*0.025*3300)
+#define loadCurrentUnit		0.00048828125			// (2.5/2^12)/(0.05*0.025*1000)
 #define VchargeUnit			0.00106926251174812		// (2.5/2^12)*(100+133)/133
 
 /**** Regulators Enable and Power Save ****/
