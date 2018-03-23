@@ -1,0 +1,61 @@
+component MOSFETs_EPS
+    % Code produced by Embedded Systems Group - UFSC
+    % Voltage drop to Mosfets : FS6898AZ
+    
+    nodes
+        Bus = foundation.electrical.electrical; % +:left
+        Bat = foundation.electrical.electrical; % -:right
+        
+    end
+    variables
+        i = { 1, 'A' };        % Current
+        v = { 0, 'V' };        % Voltage
+        Vr_DC = { 0, 'V' };    % Bateria exchange mosfet drop voltage
+        Vr_CC = { 0, 'V' };    % Bateria change mosfet drop voltage
+        
+    end
+    parameters
+        Vt = {1.38e-23 *298/1.60e-19,'V'}; % Thermal voltage
+        % k_const = {1.38e-23,'J/K'};       % Boltzman’s const
+        % q = {1.60e-19,'C'};               % Charge on an electron
+        Rsd = { 0.27, 'Ohm' };             % Resistance Serie Diode
+        Rs = {0.008235 , 'Ohm' };          % Resistance Serie Mosfet ON Vg=9V
+        n = 1.89492;                       % "diode quality" factor
+        Is = {1.26064e-7, 'A'};            % The saturation current at 23ºC
+    end
+    
+    function setup
+    %     if R <= 0
+    %         error( 'Resistance value must be greater than zero' );
+    %     end
+    end
+    
+    branches
+        i :  Bus.i ->  Bat.i;
+    end
+    
+    equations
+        
+        if i >= {0, 'A'}
+            v == Bus.v - Bat.v;
+        else
+            v ==  Bat.v - Bus.v;
+        end
+        if Bat.v <=  {2.4, 'V'}
+            Vr_DC == n * Vt * log(abs(i)/Is)+ abs(i) * Rsd;  % Forward Drop Voltage Diode
+            Vr_CC == abs(i) * Rs;
+            
+        elseif ({2.4, 'V'} < Bat.v) && (Bat.v <= {4.2, 'V'})
+            Vr_CC == abs(i) * Rs;
+            Vr_DC == abs(i) * Rs;
+            
+        else
+            Vr_CC == abs(i)*{0.0094, 'Ohm'}; % Resistance Serie Mosfet ON Vg=4V
+            Vr_DC ==  abs(i) * Rs;
+        end
+               
+        v == Vr_CC+Vr_DC;         % Voltage Drop MOSFET;
+        
+    end
+    
+end

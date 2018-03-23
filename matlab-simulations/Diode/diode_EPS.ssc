@@ -1,0 +1,50 @@
+component diode_EPS
+    % Code produced by Embedded Systems Group - UFSC
+    % Voltage drop to diode : NSVR0320MW2T1G
+    % T = Temp in Deg C
+    % I = Current (A)
+    
+    nodes
+        a = foundation.electrical.electrical; % +:left
+        k = foundation.electrical.electrical; % -:right
+        
+    end
+    variables
+        i = { 1, 'A' };     % Current
+        v = { 0, 'V' };     % Voltage
+       % T_K=;     % Temperature
+        
+    end
+    parameters
+        Vt = {1.38e-23 *298/1.60e-19,'V'};       % Thermal voltage
+       % k_const = {1.38e-23,'J/K'};              % Boltzman’s const
+       % q = {1.60e-19,'C'};                      % Charge on an electron
+        R = { 0.0084, 'Ohm' };                     % Resistance
+        n = 1.00404;                              % "diode quality" factor
+        Is = {1.3032e-6, 'A'};            % The saturation current at 23ºC
+        
+        
+    end
+    
+    function setup
+    %     if R <= 0
+    %         error( 'Resistance value must be greater than zero' );
+    %     end
+    end
+    
+    branches
+        i : a.i -> k.i;
+    end
+    
+    equations
+        if i> {0, 'A'}
+           v == a.v - k.v;
+           % Is == Is_23 + 0.127e-6 * (T-23);        % The Saturation Current at Temp T
+           v == n * Vt * log(i/Is)+R*i;         % Forward Voltage Drop Diode ;
+        else 
+            v == k.v - a.v;
+            v == abs(i) * {20000000, 'Ohm'}
+        end
+    end
+    
+end
