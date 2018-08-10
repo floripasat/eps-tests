@@ -1,5 +1,6 @@
 /*
  * hal.h
+ *hardware abstraction layer
  *
  *  Created on: 11/09/2017
  *      Author: Bruno Eiterer

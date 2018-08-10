@@ -10,7 +10,6 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
-"./estrutura_codigo.obj" \
 "./main.obj" \
 "./source/ADC.obj" \
 "./source/clock.obj" \
@@ -162,8 +161,8 @@ fsat_eps_vldo.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "estrutura_codigo.obj" "main.obj" "source\ADC.obj" "source\clock.obj" "source\onewire.obj" "source\scheduling.obj" "source\timer.obj" "source\uart.obj" 
-	-$(RM) "estrutura_codigo.d" "main.d" "source\ADC.d" "source\clock.d" "source\onewire.d" "source\scheduling.d" "source\timer.d" "source\uart.d" 
+	-$(RM) "main.obj" "source\ADC.obj" "source\clock.obj" "source\onewire.obj" "source\scheduling.obj" "source\timer.obj" "source\uart.obj" 
+	-$(RM) "main.d" "source\ADC.d" "source\clock.d" "source\onewire.d" "source\scheduling.d" "source\timer.d" "source\uart.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

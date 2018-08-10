@@ -1,1 +1,1 @@
-"./estrutura_codigo.obj" "./main.obj" "./source/ADC.obj" "./source/clock.obj" "./source/onewire.obj" "./source/scheduling.obj" "./source/timer.obj" "./source/uart.obj" "../lnk_msp430f6659.cmd" -llibc.a -llibmath.a 
+"./main.obj" "./source/ADC.obj" "./source/clock.obj" "./source/onewire.obj" "./source/scheduling.obj" "./source/timer.obj" "./source/uart.obj" "../lnk_msp430f6659.cmd" -llibc.a -llibmath.a 

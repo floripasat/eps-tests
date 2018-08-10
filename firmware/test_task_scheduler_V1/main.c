@@ -3,6 +3,7 @@
  *
  *  Created on: 11/09/2017
  *      Author: Bruno Eiterer
+ *              Sara Vega Martínez
  */
 
 #include <msp430.h>
@@ -13,6 +14,10 @@
 #include "timer.h"
 #include "onewire.h"
 #include "uart.h"
+#include "scheduling.h"
+
+/***** Scheduling ******/
+volatile unsigned int LCA = 0;  // variable used to determine the load current action
 
 void MSP430config(void);
 
@@ -42,42 +47,53 @@ void main(void){
 		timerDebugPort ^= timerDebugPin;	// set debug pin
 		TA0CCTL0 &= ~CCIFG;					// clear interrupt flag
 
+		switch(LCA){ //load current action
+		        case 0: uartTX("Decrease");
+		        break;
+		        case 1: uartTX("Increase");
+		        break;
+		        case 2: uartTX("-Eclipse");
+		        break;
+		        case 3:uartTX("-TurnOff");
+		        break;
+		        default: uartTX("NULLNULL");
+		    }
+
 		adcChannels.VpanelsVoltage = adcRead(VpanelsAdcChannel);
-		uartTXFloat(adcChannels.VpanelsVoltage*VpanelsUnit);
+		uartTXFloat(adcChannels.VpanelsVoltage * VpanelsUnit);
 		uartTX(",");
 		adcChannels.pXPanelVoltage = adcRead(pXPanelVoltageAdcChannel);
-		uartTXFloat(adcChannels.pXPanelVoltage*panelVoltageUnit);
+		uartTXFloat(adcChannels.pXPanelVoltage * panelVoltageUnit);
 		uartTX(",");
 		adcChannels.nXPanelVoltage = adcRead(nXPanelVoltageAdcChannel);
-		uartTXFloat(adcChannels.nXPanelVoltage*panelVoltageUnit);
+		uartTXFloat(adcChannels.nXPanelVoltage * panelVoltageUnit);
 		uartTX(",");
 		adcChannels.pYPanelVoltage = adcRead(pYPanelVoltageAdcChannel);
-		uartTXFloat(adcChannels.pYPanelVoltage*panelVoltageUnit);
+		uartTXFloat(adcChannels.pYPanelVoltage * panelVoltageUnit);
 		uartTX(",");
 		adcChannels.nYPanelVoltage = adcRead(nYPanelVoltageAdcChannel);
-		uartTXFloat(adcChannels.nYPanelVoltage*panelVoltageUnit);
+		uartTXFloat(adcChannels.nYPanelVoltage * panelVoltageUnit);
 		uartTX(",");
 		adcChannels.VchargeVoltage = adcRead(VchargeAdcChannel);
-		uartTXFloat(adcChannels.VchargeVoltage*VchargeUnit);
+		uartTXFloat(adcChannels.VchargeVoltage * VchargeUnit);
 		uartTX(",");
-
-		adcChannels.pXPanelCurrent = adcRead(pXPanelCurrentAdcChannel);
-		uartTXFloat(adcChannels.pXPanelCurrent*panelCurrentUnit);
+        adcChannels.pXPanelCurrent = adcRead(pXPanelCurrentAdcChannel);
+		uartTXFloat(adcChannels.pXPanelCurrent * panelCurrentUnit);
 		uartTX(",");
 		adcChannels.nXPanelCurrent = adcRead(nXPanelCurrentAdcChannel);
-		uartTXFloat(adcChannels.nXPanelCurrent*panelCurrentUnit);
+		uartTXFloat(adcChannels.nXPanelCurrent * panelCurrentUnit);
 		uartTX(",");
 		adcChannels.pYPanelCurrent = adcRead(pYPanelCurrentAdcChannel);
-		uartTXFloat(adcChannels.pYPanelCurrent*panelCurrentUnit);
+		uartTXFloat(adcChannels.pYPanelCurrent * panelCurrentUnit);
 		uartTX(",");
 		adcChannels.nYPanelCurrent = adcRead(nYPanelCurrentAdcChannel);
-		uartTXFloat(adcChannels.nYPanelCurrent*panelCurrentUnit);
+		uartTXFloat(adcChannels.nYPanelCurrent * panelCurrentUnit);
 		uartTX(",");
 		adcChannels.pZPanelCurrent = adcRead(pZPanelCurrentAdcChannel);
-		uartTXFloat(adcChannels.pZPanelCurrent*panelCurrentUnit);
+		uartTXFloat(adcChannels.pZPanelCurrent * panelCurrentUnit);
 		uartTX(",");
 		adcChannels.loadCurrent = adcRead(loadCurrentAdcChannel);
-		uartTXFloat(adcChannels.loadCurrent*loadCurrentUnit);
+		uartTXFloat(adcChannels.loadCurrent * loadCurrentUnit);
 		uartTX(",");
 
 		uint8_t auxString[4];
@@ -106,12 +122,12 @@ void main(void){
 		uartTXFloat(batteryMeasurements.accumulatedCurrent*batteryAccumulatedCurrentUnit);
 		uartTX("\r\n");
 
+		//eclipse
 		if((adcChannels.nXPanelCurrent + adcChannels.nYPanelCurrent + adcChannels.pXPanelCurrent + adcChannels.pYPanelCurrent + adcChannels.pZPanelCurrent)*panelCurrentUnit < 0.03
 				& (adcChannels.nXPanelVoltage + adcChannels.nYPanelVoltage + adcChannels.pXPanelVoltage + adcChannels.pYPanelVoltage)*panelVoltageUnit < 4){
-			load3V3EnablePort |= load3V3EnablePin;
-		}else{
-			load3V3EnablePort &= ~load3V3EnablePin;
-		}
+		//	load3V3EnablePort |= load3V3EnablePin;
+		    LCA = 2;
+		} // end if
 	}
 }
 
