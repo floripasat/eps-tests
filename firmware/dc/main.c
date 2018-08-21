@@ -42,6 +42,10 @@ void main(void){
 		timerDebugPort ^= timerDebugPin;	// set debug pin
 		TA0CCTL0 &= ~CCIFG;					// clear interrupt flag
 
+		//test scheduling
+		uartTX("00010001");
+		uartTX(",");
+		
 		adcChannels.VpanelsVoltage = adcRead(VpanelsAdcChannel);
 		uartTXFloat(adcChannels.VpanelsVoltage*VpanelsUnit);
 		uartTX(",");
