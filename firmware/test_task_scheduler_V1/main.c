@@ -19,6 +19,15 @@
 /***** Scheduling ******/
 volatile unsigned int LCA = 0;  // variable used to determine the load current action
 
+volatile float volt = 0;
+volatile float curr = 0;
+volatile float previous_power = 0;
+volatile int cont = 0;
+volatile float mean_voltage = 0;
+volatile float mean_current = 0;
+volatile float mean_power = 0;
+volatile float accumulated_current = 0; //variable used to save the battery accumulated current value
+
 void MSP430config(void);
 
 void main(void){
@@ -43,9 +52,50 @@ void main(void){
 	load3V3PSPort |= load3V3PSPin;			// disable 3V3 load regulator PS
 
 	while(1){
-		while(!(TA0CCTL0 && CCIFG));		// wait until interrupt is triggered (1 second is passed)
+		
+		volt = 0;
+		curr = 0;
+		cont = 0; 
+		
+		while(!(TA0CCTL0 && CCIFG)){		// wait until interrupt is triggered (1 second is passed)
+			adcChannels.pXPanelVoltage = adcRead(pXPanelVoltageAdcChannel);
+			mean_voltage = (adcChannels.pXPanelVoltage * panelVoltageUnit);	
+			adcChannels.pXPanelCurrent = adcRead(pXPanelCurrentAdcChannel);
+			mean_current = adcChannels.pXPanelCurrent * panelCurrentUnit;
+			volt = volt + mean_voltage;
+			curr = curr + mean_current;
+			cont ++;		
+		}
 		timerDebugPort ^= timerDebugPin;	// set debug pin
 		TA0CCTL0 &= ~CCIFG;					// clear interrupt flag
+		
+		mean_power = (volt * curr)/cont;
+		batteryMeasurements.accumulatedCurrent = (DS2784ReadRegister(accumulated_current_MSB_register) << 8) + DS2784ReadRegister(accumulated_current_LSB_register);
+		accumulated_current = batteryMeasurements.accumulatedCurrent * batteryAccumulatedCurrentUnit;
+		
+		//scheduling
+			if(curr>0.02){
+				if(previous_power<mean_power){			// determine if previous load current action increased or decreased the input power
+					LCA = 0;		// set action to decrease load current (increase battery voltage)
+				}else{
+					if(previous_power>mean_power){
+						LCA = 1;		// set action to increase load current (decrease battery voltage)
+					}else{
+						LCA = 4;
+					} //end else
+				} // end else
+			}else{
+				if(accumulated_current>=0.55 && LCA == 2)   //determine if battery voltage is less than 2,6 to turn off the load
+					LCA=2;
+				if(accumulated_current<=0.56 && LCA == 3)
+					LCA=3;
+				if(accumulated_current<0.55)
+		 			LCA = 3;
+				if(accumulated_current>0.56)
+		 			LCA = 2;
+			} //end else
+				
+		previous_power = mean_power;		
 
 		switch(LCA){ //load current action
 		        case 0: uartTX("Decrease");
