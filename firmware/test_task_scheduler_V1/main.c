@@ -57,18 +57,20 @@ void main(void){
 		curr = 0;
 		cont = 0; 
 		
-		while(!(TA0CCTL0 && CCIFG)){		// wait until interrupt is triggered (1 second is passed)
+		while(cont!=4){		// wait until interrupt is triggered (1 second is passed)
 			adcChannels.pXPanelVoltage = adcRead(pXPanelVoltageAdcChannel);
-			mean_voltage = (adcChannels.pXPanelVoltage * panelVoltageUnit);	
+			mean_voltage = (adcChannels.pXPanelVoltage * panelVoltageUnit);
 			adcChannels.pXPanelCurrent = adcRead(pXPanelCurrentAdcChannel);
 			mean_current = adcChannels.pXPanelCurrent * panelCurrentUnit;
 			volt = volt + mean_voltage;
 			curr = curr + mean_current;
-			cont ++;		
+			cont ++;
+			while(!(TA0CCTL0 && CCIFG));
+			timerDebugPort ^= timerDebugPin;    // set debug pin
+			TA0CCTL0 &= ~CCIFG;
 		}
-		timerDebugPort ^= timerDebugPin;	// set debug pin
-		TA0CCTL0 &= ~CCIFG;					// clear interrupt flag
 		
+
 		mean_power = (volt * curr)/cont;
 		batteryMeasurements.accumulatedCurrent = (DS2784ReadRegister(accumulated_current_MSB_register) << 8) + DS2784ReadRegister(accumulated_current_LSB_register);
 		accumulated_current = batteryMeasurements.accumulatedCurrent * batteryAccumulatedCurrentUnit;
